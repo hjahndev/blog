@@ -2,7 +2,6 @@
 	pageEncoding="UTF-8"%>
 <%@include file="../includes/header.jsp" %>
   <!-- Page Header -->
-  <header class="masthead" style="background-image: url('img/about-bg.jpg')">
     <div class="overlay"></div>
     <div class="container">
       <div class="row">
@@ -14,7 +13,6 @@
         </div>
       </div>
     </div>
-  </header>
 
   <!-- Main Content -->
   <div class="container">
@@ -26,6 +24,12 @@
       </div>
     </div>
   </div>
-
-  <hr>
+	<i class="fab fa-css3-alt fa-5x"></i>
+	<i class="fab fa-js-square fa-5x"></i>
+    <span class="fa-stack fa-lg">
+     <i class="fas fa-square fa-stack-5x"></i>
+     <i class="fab fa-java fa-stack-4x fa-inverse"></i>
+    </span>
+	<i class="fab fa-html5 fa-5x"></i>
+<hr>
 <%@include file="../includes/footer.jsp" %>

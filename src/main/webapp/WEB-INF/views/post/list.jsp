@@ -20,7 +20,7 @@
             </h3>
           </a>
             <p class="post-meta">Posted by
-              <c:out value="${post.writer}" />
+              <a href="#"><c:out value="${post.writer}" /></a>
               on <fmt:formatDate pattern="yyyy-MM-dd"
               value="${post.regdate}"/></p>
         </div>
@@ -36,4 +36,5 @@
     </div>
   </div>
   <hr>
+  
 <%@include file="../includes/footer.jsp" %>

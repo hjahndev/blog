@@ -9,6 +9,9 @@
     <Root level="info">
       <AppenderRef ref="Console"/>
     </Root>
+    <Logger name="jdbc.audit" level="warn"/>
+    <Logger name="jdbc.resulteset" level="warn"/>
+    <Logger name="jdbc.connection" level="warn"/>
   </Loggers>
 </Configuration>
 

@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.blog.mapper.PostMapper">
+
+  <select id="getList" resultType="com.blog.vo.PostVO">
+	<![CDATA[
+		SELECT /*+INDEX_DESC(blog blog_pno_pk) */
+			   pno, title, content, writer, regDate
+		  FROM blog 
+		 WHERE 1 = 1
+	]]>
+  </select>
+
+  <select id="get" resultType="com.blog.vo.PostVO">
+	SELECT pno, title, content, writer, regDate 
+	  FROM blog 
+	 WHERE pno = #{pno}
+  </select>
+  
+  <insert id="insert">
+	INSERT INTO blog (pno, title, content, writer)
+	VALUES (seq_blog.nextval, #{title}, #{content}, #{writer})
+  </insert>
+
+  <delete id="delete">
+	DELETE blog WHERE pno = #{pno}
+  </delete>
+
+  <update id="update">
+	UPDATE blog
+	   SET title = #{title},
+		   content = #{content},
+		   writer = #{writer},
+		   updateDate = sysdate
+	 WHERE pno = #{pno}
+  </update>
+  
+</mapper>
