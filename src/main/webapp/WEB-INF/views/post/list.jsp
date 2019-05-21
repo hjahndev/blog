@@ -27,14 +27,27 @@
         <hr>
       </c:forEach>		
       <!-- 블로그 목록 끝 -->
-      
         <!-- Pager -->
-        <div class="clearfix">
-          <a class="btn btn-primary float-right" href="#">Older Posts &rarr;</a>
-        </div>
+        <nav aria-label="...">
+		  <ul class="pagination justify-content-center">
+		    <li class="page-item">
+		      <a class="page-link" href="#" tabindex="-1">&laquo;</a>
+			</li>
+		    <c:forEach var="num" begin="${pageMaker.startPage}"
+	       end="${pageMaker.endPage}">
+			  <li class="page-item "><a class="page-link" href="#">1</a></li>
+			  <li class="page-item active">
+			    <a class="page-link" href="#">2 <span class="sr-only">(current)</span></a>
+			  </li>
+			  <li class="page-item"><a class="page-link" href="#">3</a></li>
+		    </c:forEach>
+			<li class="page-item">
+			  <a class="page-link" href="#">&raquo;</a>
+			</li>
+		  </ul>
+		</nav>
       </div>
     </div>
   </div>
-  <hr>
   
 <%@include file="../includes/footer.jsp" %>

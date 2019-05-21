@@ -1,0 +1,136 @@
+.page-link {
+  position: relative;
+  display: block;
+  padding: 0.5rem 0.75rem;
+  margin-left: -1px;
+  line-height: 1.25;
+  color: #0085A1;
+  background-color: #fff;
+  border: 1px solid #dee2e6;
+}
+.page-item.active .page-link {
+  z-index: 1;
+  color: #fff;
+  background-color: #0085A1;
+  border-color: #0085A1;
+}
+body{
+  font-family: 'Nanum Gothic', 'Open Sans', 'Helvetica Nene', Helvetica, Arial;
+}
+.btn-sm {
+	padding: .375rem .75rem;
+    font-size: .875rem;
+    line-height: 1.5;
+    border-radius: 0;
+}
+.btn-outline-primary {
+    color: #0085a1;
+    border-color: #0085a1;
+}
+.btn-outline-primary:hover {
+  color: #fff;
+  background-color: #0085a1;
+  border-color: #0085a1;
+}
+.page-item:first-child .page-link {
+    margin-left: 0;
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
+}
+.page-item:last-child .page-link {
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
+}
+.form-control:disabled, .form-control[readonly] {
+	background-color:transparent;
+	opacity: 1;
+    margin-top: 10;
+    margin-bottom: 10;
+}
+.floating-label-form-group {
+    font-size: 1rem;
+    position: relative;
+    margin-bottom: 0;
+    padding: .5em;
+    border-bottom: 1px solid #dee2e6;
+    border-top: 1px solid #dee2e6;
+}
+.control-group.comment-list .form-group {
+    font-weight: 400;
+    padding-left: .725rem;
+    margin-bottom: 0;
+}
+span.comment-date {
+	color: #999;
+    font-size: .7rem;
+    vertical-align: middle;
+}
+span.comment-writer {
+	font-size: 1.1rem;
+	font-weight: bold;
+}
+.comment {
+	font-size: 1rem;
+	margin-top: 10px;
+	margin-bottom: 2.5px;
+    margin-left: -5px;
+}
+.control-group.comment-list {
+ 	margin-bottom: 1rem;
+}
+.container.comment-list {
+	padding-left: 0;
+}
+.commentButton span {
+	font-size: .8rem;
+	margin: .25rem;
+	cursor: pointer;
+}
+.commentButton {
+	margin-left: .25rem;
+}
+.modal {
+	font-size: 1rem;
+}
+a[name=modifyCommentBtn], a[name=cancelModifyBtn] {
+	font-size: .8rem;
+	margin: .25rem;
+	cursor: pointer;
+}
+#modifyForm, #registerForm {
+	margin-top: 2rem;
+	margin-bottom: 3rem;
+}
+#modifyForm label, #registerForm label {
+	font-size: 1rem;
+	padding-right: 0;
+	text-align: left;
+    padding-left: 2rem;
+}
+#modifyForm input, #registerForm input {
+	font-size: 1rem;
+	border-radius: 0;
+}
+#modifyForm textarea, #registerForm textarea {
+	border-radius: 0;
+}
+#modifyForm .control-group, #registerForm .control-group {
+	margin-bottom: 2rem;
+}
+textarea {
+	resize: none;
+}
+.help-block {
+	font-size: 1rem;
+	margin: 0;
+}
+.help-block ul {
+	margin: 0;
+}
+.commentForm {
+	margin-top: 3rem;
+}
+.invalid-feedback {
+    font-size: .8rem;
+    margin-left: .2rem
+ }

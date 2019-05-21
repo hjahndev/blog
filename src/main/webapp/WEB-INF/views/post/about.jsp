@@ -31,5 +31,5 @@
      <i class="fab fa-java fa-stack-4x fa-inverse"></i>
     </span>
 	<i class="fab fa-html5 fa-5x"></i>
-<hr>
+
 <%@include file="../includes/footer.jsp" %>

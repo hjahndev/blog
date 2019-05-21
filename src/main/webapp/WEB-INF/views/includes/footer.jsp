@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+  <hr>
   <!-- Footer -->
   <footer>
     <div class="container">
@@ -15,7 +16,7 @@
               </a>
             </li>
           </ul>
-          <p class="copyright text-muted">Copyright &copy; Your Website 2019</p>
+          <p class="copyright text-muted">Copyright &copy; hjahn.dev Website 2019</p>
         </div>
       </div>
     </div>
@@ -24,11 +25,11 @@
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
   <!-- Bootstrap core JavaScript -->
   <script src="/resources/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-
   <!-- Custom scripts for this template -->
   <script src="/resources/js/clean-blog.min.js"></script>
   
   <script src="/resources/js/blog.js"></script>
+  <script src="/resources/js/comment.js"></script>
 
 </body>
 </html>

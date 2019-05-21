@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper 
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.blog.mapper.CommentMapper">
+	<insert id="insert">
+		INSERT INTO tbl_comment (cno, pno, content, writer, password)
+		VALUES (seq_comment.nextval, #{pno}, #{comment}, #{writer}, #{password})
+	</insert>
+	
+	<delete id="delete">
+		DELETE FROM tbl_comment WHERE cno = #{cno}
+	</delete>
+	
+	<update id="update">
+		UPDATE tbl_comment 
+		SET content = #{comment}, updatedate = sysdate 
+		WHERE cno = #{cno}
+	</update>
+
+	<select id="getList" resultType="com.blog.vo.CommentVO">
+		SELECT cno, pno, content "comment", writer, regDate, updatedate 
+		  FROM (
+				SELECT /*+INDEX_ASC(tbl_comment pk_comment) */
+					  rownum "rn", cno, pno, content, writer, regDate, updatedate 
+		  		  FROM tbl_comment 
+		 		 WHERE pno = #{pno}
+		 	   )
+	</select>
+</mapper>  

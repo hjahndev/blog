@@ -63,7 +63,7 @@ public class PostController {
 	
 	@PostMapping("/register")
 	public String register(PostVO vo, RedirectAttributes rttr) {
-		logger.info("register: {} ", vo);
+		logger.info("register: {} ", vo.getContent());
 		if(service.register(vo)) {
 			rttr.addFlashAttribute("result", vo.getPno());		
 		}
@@ -71,9 +71,10 @@ public class PostController {
 	}
 	
 	@GetMapping({"/modify"})
-	public String updateForm(@RequestParam("pno") Long pno, Model model) {
+	public String updateForm(@RequestParam("pno") Long pno,@RequestParam("rows") int rows, Model model) {
 		logger.info("/updateForm");
 		model.addAttribute("post", service.get(pno));
+		model.addAttribute("rows", rows);
 		return "post/modify";
 	}
 	
@@ -85,5 +86,15 @@ public class PostController {
 	@GetMapping("/about")
 	public String about() {
 		return "post/about";
+	}
+
+	@GetMapping("/login")
+	public String login() {
+		return "post/login";
+	}
+	
+	@GetMapping("/join")
+	public String join() {
+		return "post/join";
 	}
 }
