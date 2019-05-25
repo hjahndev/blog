@@ -20,8 +20,10 @@
     <div class="row">
       <div class="col-lg-8 col-md-10 mx-auto">
         <form method="post" id="registerForm" novalidate>
-        <!-- 로그인 한 사람으로 바꾸기 -->
-          <input type="hidden" name="writer" value="익명">
+          <sec:authorize access="hasRole('ADMIN')">
+            <input type="hidden" name="writer" value='<sec:authentication property="principal.username"/>'>
+          </sec:authorize>
+          <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
           <div class="control-group">
             <div class="form-group row">
               <label class="col-sm-2 col-form-label">제목</label>

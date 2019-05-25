@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib uri="http://www.springframework.org/security/tags" prefix="sec" %>	
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -7,6 +8,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <meta name="description" content="">
   <meta name="author" content="">
+  <sec:csrfMetaTags />
   <title>Blog</title>
   <!-- google web font -->
   <link href="https://fonts.googleapis.com/css?family=Nanum+Gothic&amp;subset=korean" rel="stylesheet">
@@ -45,10 +47,17 @@
           </li>
           <!-- 나중에 로그인 한 사람만 보이게 바꾸기 -->
           <li class="nav-item">
-            <a class="nav-link" href="/register">Write</a>
+            <sec:authorize access="hasRole('ADMIN')">
+              <a class="nav-link" href="/register">Write</a>
+            </sec:authorize>
           </li> 
           <li class="nav-item">
-            <a class="nav-link" href="/login">Login</a>
+          	<sec:authorize access="isAnonymous()">
+           	  <a class="nav-link" href="/member/login">Login</a>
+            </sec:authorize>
+            <sec:authorize access="isAuthenticated()">
+           	  <a class="nav-link" href="" id="logout">Logout</a>
+            </sec:authorize>
           </li> 
         </ul>
       </div>

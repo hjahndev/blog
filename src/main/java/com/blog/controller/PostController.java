@@ -2,6 +2,7 @@ package com.blog.controller;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -43,6 +44,7 @@ public class PostController {
 		return "post/post";
 	}
 	
+	@PreAuthorize("principal.username == #vo.writer")
 	@PostMapping("/modify")
 	public String modify(PostVO vo, RedirectAttributes rttr) {
 		logger.info("modify: {}", vo);
@@ -52,8 +54,9 @@ public class PostController {
 		return "redirect:/list";
 	}
 	
+	@PreAuthorize("principal.username == #writer")
 	@PostMapping("/remove")
-	public String remove(@RequestParam("pno") Long pno,	RedirectAttributes rttr) {
+	public String remove(@RequestParam("pno") Long pno,	String writer, RedirectAttributes rttr) {
 		logger.info("remove: {}", pno);
 		if(service.remove(pno)) {
 			rttr.addFlashAttribute("result", "success");
@@ -61,6 +64,7 @@ public class PostController {
 		return "redirect:/list";
 	}
 	
+	@PreAuthorize("hasRole('ROLE_ADMIN')")
 	@PostMapping("/register")
 	public String register(PostVO vo, RedirectAttributes rttr) {
 		logger.info("register: {} ", vo.getContent());

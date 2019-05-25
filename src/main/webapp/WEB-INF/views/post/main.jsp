@@ -35,5 +35,4 @@
       </div>
     </div>
   </div>
-  <hr>
 <%@include file="../includes/footer.jsp" %>

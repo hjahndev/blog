@@ -134,3 +134,19 @@ textarea {
     font-size: .8rem;
     margin-left: .2rem
  }
+.btn-primary {
+    background-color: #0085a1;
+    border-color: #0085a1;
+}
+.alert {
+	font-size: .8rem;
+}
+.small, small {
+	font-size: 70%;
+}
+.text-primary {
+	color: #0085a1!important;
+}
+label {
+	color: #495057;
+}

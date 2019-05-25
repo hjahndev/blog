@@ -22,6 +22,7 @@
         <form method="post" id="modifyForm" novalidate>
           <input name="pno" type="hidden" value="${post.pno}">
           <input name="writer" type="hidden" value="${post.writer}">
+          <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
           <div class="control-group">
             <div class="form-group row">
               <label class="col-sm-2 col-form-label">제목</label>

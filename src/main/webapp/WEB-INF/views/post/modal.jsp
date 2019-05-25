@@ -32,6 +32,7 @@
       <div class="modal-body">삭제된 글은 복구가 불가능합니다. 글을 삭제하시겠습니까?</div>
       <form method="post">
       	<input type="hidden" name="pno" value="">
+      	<input type="hidden" name="writer" value="">
       </form>
       <div class="modal-footer">
         <button class="btn btn-secondary btn-sm" type="button" data-dismiss="modal">취소</button>

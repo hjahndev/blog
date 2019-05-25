@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    
   <hr>
   <!-- Footer -->
   <footer>
@@ -30,6 +31,7 @@
   
   <script src="/resources/js/blog.js"></script>
   <script src="/resources/js/comment.js"></script>
+  <script src="/resources/js/member.js"></script>
 
 </body>
 </html>

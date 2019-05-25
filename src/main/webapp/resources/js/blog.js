@@ -11,13 +11,15 @@ $(document).ready(function(){
 	});
 	
 	$('#removeBtn').on('click', function(e){
-		let pno = $('#pno').val();
 		$('#removeModal').modal('show');
-		$('#removeModal').find('input').attr('value', pno);
+		$('#removeModal').find('input[name=pno]').attr('value', $('#pno').val());
+		$('#removeModal').find('input[name=writer]').attr('value', $('input[name=writer]').val());
 	});
 	
 	$('#postRemoveBtn').on('click', function(e){
-		$('#removeModal').find('form').attr('action', '/remove').submit();
+		let token = $("meta[name='_csrf']").attr("content");
+		let csrfInput = '<input type="hidden" name="_csrf" value="'+token+'" />';
+		$('#removeModal').find('form').append(csrfInput).attr('action', '/remove').submit();
 		$('#remove').modal('hide');
 	});
 	
@@ -51,9 +53,10 @@ $(document).ready(function(){
 	});
 	
 	$('textarea').on('keyup input change paste propertychange', function() {
-		//입력창은 15줄 이하일 경우 줄어들지 않도록
+		//입력창, 수정창은 15줄 이하일 경우 줄어들지 않도록
 		let minHeight = 372;
-		if($(this).parents('form').attr('id')==='registerForm'
+		let formId = $(this).parents('form').attr('id');
+		if((formId === 'registerForm' || formId === 'modifyForm')
 			&& $(this).prop('scrollHeight') <= minHeight) {
 			return;
 		}

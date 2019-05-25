@@ -45,15 +45,21 @@
 		<div class="col-lg-8 col-md-10 mx-auto">
 			<div class=" text-center">
 			    <input id="pno" name="pno" type="hidden" value="${post.pno}">
+			    <input name="writer" type="hidden" value="${post.writer}">
 				<ul class="list-inline text-center">
-					<li class="list-inline-item">
+				  <sec:authentication property="principal" var="pinfo"/>
+	  	    	  <sec:authorize access="isAuthenticated()">
+	  	  	  		<c:if test="${pinfo.username eq post.writer}">
+					  <li class="list-inline-item">
 						<button type="submit" class="btn btn-outline-primary btn-sm"
 							id="updateFormBtn">수정</button>
-					</li>
-					<li class="list-inline-item">
+					  </li>
+					  <li class="list-inline-item">
 						<button type="submit" class="btn btn-outline-primary btn-sm"
 							id="removeBtn">삭제</button>
-					</li>
+					  </li>
+					</c:if>
+				  </sec:authorize>	  
 				</ul>
 			</div>
 		</div>
@@ -74,10 +80,16 @@
 					</div>
 					<div class="form-row">
 						<div class="form-group col-4">
+						  <sec:authorize access="isAuthenticated()">
+							<input type="text" class="form-control" name="writer"
+							 value='<sec:authentication property="principal.username"/>' readonly>
+						  </sec:authorize>
+						  <sec:authorize access="isAnonymous()">
 							<input type="text" class="form-control" placeholder="이름" name="writer" required>
 							<div class="invalid-feedback">
 						  	  이름을 입력해 주세요. 
 							</div>
+						  </sec:authorize>	
 						</div>
 						<div class="form-group col-4">
 							<input type="password" class="form-control" placeholder="비밀번호" name="password"
