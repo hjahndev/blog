@@ -1,6 +1,4 @@
 $(document).ready(function(){
-	history.replaceState({},null,null);
-	
 	if($('span.comment').length){
 		showComments();
 	}
@@ -62,6 +60,18 @@ $(document).ready(function(){
 		}
 		$(this).height(1).height($(this).prop('scrollHeight')+12);
 	});
+	
+	$('.scroll-to-top').on('click', function() {
+		window.scroll(0,0);
+	});
+	
+	$(window).scroll( function() {
+		if ($(this).scrollTop() > 200 ) {
+			$('.scroll-to-top').fadeIn();
+		} else {
+			$('.scroll-to-top').fadeOut();
+		}
+	} );
 });
 
 function countTextRows(postText){

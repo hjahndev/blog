@@ -14,7 +14,7 @@
 				<h1>
 					<c:out value="${post.title}" />
 				</h1>
-				<span class="meta">Posted by <a href="#">
+				<span class="meta"><a href="#">
 					<c:out value="${post.writer}" /></a> on 
 					<fmt:formatDate pattern="yyyy-MM-dd" value="${post.regdate}" />
 				</span>

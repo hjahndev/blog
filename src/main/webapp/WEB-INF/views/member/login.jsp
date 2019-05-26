@@ -3,7 +3,9 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <%@include file="../includes/header.jsp" %>
-
+<sec:authorize access="isAuthenticated()">
+	<c:redirect url = "/list" />
+</sec:authorize>
   <div class="container">
 
     <!-- Outer Row -->

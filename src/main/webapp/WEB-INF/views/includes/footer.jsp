@@ -1,8 +1,13 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+   
+  <!-- Scroll to Top Button-->
+  <a class="scroll-to-top" href="#page-top">
+    <i class="fas fa-angle-up"></i>
+  </a>
     
-  <hr>
   <!-- Footer -->
+  <hr>
   <footer>
     <div class="container">
       <div class="row">

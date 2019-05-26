@@ -12,12 +12,12 @@
       <c:forEach items="${list}" var="post">
         <div class="post-preview">
           <a class="read" href='<c:out value="${post.pno}"/>'>
-            <h2 class="post-title">
+            <div class="post-title">
               <c:out value="${post.title}" />
-            </h2>
-            <h3 class="post-subtitle">
-              	글 내용 일부
-            </h3>
+            </div>
+            <div class="post-content">
+              <c:out value="${post.content}" />
+            </div>
           </a>
             <p class="post-meta">Posted by
               <a href="#"><c:out value="${post.writer}" /></a>

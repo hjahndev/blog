@@ -150,3 +150,48 @@ textarea {
 label {
 	color: #495057;
 }
+.scroll-to-top {
+    position: fixed;
+    right: 1rem;
+    bottom: 1rem;
+    display: none;
+    width: 2.75rem;
+    height: 2.75rem;
+    text-align: center;
+    color: #fff;
+    background: rgba(90,92,105,.5);
+    line-height: 46px;
+}
+.post-preview>.post-meta {
+	margin-top: 10px;
+}
+.post-preview>a>.post-title {
+	font-size: 120%;
+	font-weight: 600;
+}
+.post-preview>a>.post-content {
+	font-size: 90%;
+	word-break: break-all;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    line-height: 160%;
+    -webkit-box-orient: vertical;
+}
+.post-heading {
+	margin-bottom: 20px;
+}
+.post-heading>span {
+	font-size: 80%;
+}
+.error {
+	color: #5a5c69;
+    font-size: 7rem;
+    position: relative;
+    line-height: 1;
+    width: 12.5rem;
+}
+.text-gray-800 {
+    color: #5a5c69!important;
+}
