@@ -7,10 +7,30 @@
   <select id="getList" resultType="com.blog.vo.PostVO">
 	<![CDATA[
 		SELECT /*+INDEX_DESC(blog blog_pno_pk) */
-			   pno, title,  regexp_substr(content,'[^('||chr(13)||chr(10)||')]+',1,1) "content", writer, regDate
+			   pno, title,  regexp_substr(content,'[^('||chr(13)||chr(10)||')]+',1,1) as content, writer, regDate
 		  FROM blog 
 		 WHERE 1 = 1
 	]]>
+  </select>
+
+  <select id="getListWithPage" resultType="com.blog.vo.PostVO">
+	<![CDATA[
+		SELECT 
+			   pno, title,  content, writer, regDate
+		  FROM ( 
+		  		SELECT /*+INDEX_DESC(blog blog_pno_pk) */
+			           rownum as rn, pno, title,  regexp_substr(content,'[^('||chr(13)||chr(10)||')]+',1,1) as content, 
+			           writer, regDate
+			      FROM blog
+			     WHERE rownum <= #{page} * #{countPerPage}
+			    )
+		 WHERE rn > (#{page} - 1) * #{countPerPage}
+	]]>
+  </select>
+  
+  <select id="getTotal" resultType="int">
+	SELECT count(*)
+	  FROM blog
   </select>
 
   <select id="get" resultType="com.blog.vo.PostVO">

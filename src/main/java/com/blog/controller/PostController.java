@@ -12,6 +12,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.blog.service.PostService;
+import com.blog.vo.PageSettingVO;
+import com.blog.vo.PagingVO;
 import com.blog.vo.PostVO;
 
 @Controller
@@ -31,9 +33,10 @@ public class PostController {
 	}
 
 	@GetMapping("/list")
-	public String list(Model model) {
-		logger.info("list");
-		model.addAttribute("list", service.getList());
+	public String list(PageSettingVO vo, Model model) {
+		logger.info("list pagingvo: {}", vo);
+		model.addAttribute("list", service.getListWithPage(vo));
+		model.addAttribute("pagination", new PagingVO(vo, service.getTotal()));
 		return "post/list";
 	}
 	

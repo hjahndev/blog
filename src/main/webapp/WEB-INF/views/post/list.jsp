@@ -27,22 +27,24 @@
         <hr>
       </c:forEach>		
       <!-- 블로그 목록 끝 -->
+      <form id="pageForm" method="get" action="/list">
+      	<input type="hidden" name="countPerPage" value="5" />
+      	<input type="hidden" name="page" value="" />
+      </form>
         <!-- Pager -->
         <nav aria-label="...">
 		  <ul class="pagination justify-content-center">
 		    <li class="page-item">
-		      <a class="page-link" href="#" tabindex="-1">&laquo;</a>
+		      <a class="page-link" href="1" tabindex="-1">&laquo;</a>
 			</li>
-		    <c:forEach var="num" begin="${pageMaker.startPage}"
-	       end="${pageMaker.endPage}">
-			  <li class="page-item "><a class="page-link" href="#">1</a></li>
-			  <li class="page-item active">
-			    <a class="page-link" href="#">2 <span class="sr-only">(current)</span></a>
+		    <c:forEach var="page" begin="${pagination.startPage}"
+		       		end="${pagination.endPage}">
+			  <li class="page-item ${pagination.setting.page == page ? 'active':''}">
+			    <a class="page-link" href="${page}">${page}</a>
 			  </li>
-			  <li class="page-item"><a class="page-link" href="#">3</a></li>
 		    </c:forEach>
 			<li class="page-item">
-			  <a class="page-link" href="#">&raquo;</a>
+			  <a class="page-link" href="${pagination.totalPage}">&raquo;</a>
 			</li>
 		  </ul>
 		</nav>

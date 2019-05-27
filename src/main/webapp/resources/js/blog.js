@@ -8,25 +8,25 @@ $(document).ready(function(){
 		location.replace('/post?pno='+$(this).attr('href'));
 	});
 	
-	$('#removeBtn').on('click', function(e){
+	$('#removeBtn').on('click', function(){
 		$('#removeModal').modal('show');
 		$('#removeModal').find('input[name=pno]').attr('value', $('#pno').val());
 		$('#removeModal').find('input[name=writer]').attr('value', $('input[name=writer]').val());
 	});
 	
-	$('#postRemoveBtn').on('click', function(e){
+	$('#postRemoveBtn').on('click', function(){
 		let token = $("meta[name='_csrf']").attr("content");
 		let csrfInput = '<input type="hidden" name="_csrf" value="'+token+'" />';
 		$('#removeModal').find('form').append(csrfInput).attr('action', '/remove').submit();
 		$('#remove').modal('hide');
 	});
 	
-	$('#updateFormBtn').on('click', function(e){
+	$('#updateFormBtn').on('click', function(){
 		let rows = countTextRows($('#post').text());
 		location.replace('/modify?pno=' + $('#pno').val() + '&rows=' + rows);
 	});
 	
-	$('#modifyBtn').on('click', function(e){
+	$('#modifyBtn').on('click', function(){
 		let form = document.getElementById('modifyForm');
 		if(!form.checkValidity()) {
 			event.preventDefault();
@@ -36,7 +36,7 @@ $(document).ready(function(){
 		$('#modifyForm').attr('action','/modify').submit();
 	});
 	
-	$('#registerBtn').on('click', function(e){
+	$('#registerBtn').on('click', function(){
 		let form = document.getElementById('registerForm');
 		if(!form.checkValidity()) {
 			event.preventDefault();
@@ -46,7 +46,7 @@ $(document).ready(function(){
 		$('#registerForm').attr('action','/register').submit();
 	});
 	
-	$('#cancelBtn').on('click', function(e){
+	$('#cancelBtn').on('click', function(){
 		location.replace('/post?pno='+$('input[name=pno]').val());
 	});
 	
@@ -72,6 +72,12 @@ $(document).ready(function(){
 			$('.scroll-to-top').fadeOut();
 		}
 	} );
+	
+	$('.page-link').on('click', function() {
+		event.preventDefault();
+		$("#pageForm").find("input[name=page]").val($(this).attr("href"));
+		$("#pageForm").submit();
+	});
 });
 
 function countTextRows(postText){
