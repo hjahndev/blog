@@ -1,58 +1,55 @@
 package com.blog.vo;
 
-import java.util.Date;
+import java.util.ArrayList;
 import java.util.List;
+
+import org.springframework.security.crypto.password.PasswordEncoder;
 
 public class MemberVO {
 
-	private String userid;
-	private String userpw;
-	private String userName;
-	private boolean enabled;
-	private Date regDate;
-	private Date updateDate;
+	private String email;
+	private String password;
+	private String nickname;
 	private List<AuthVO> authList;
-	public String getUserid() {
-		return userid;
+	
+	public String getEmail() {
+		return email;
 	}
-	public void setUserid(String userid) {
-		this.userid = userid;
+	public void setEmail(String email) {
+		this.email = email;
 	}
-	public String getUserpw() {
-		return userpw;
+	public String getPassword() {
+		return password;
 	}
-	public void setUserpw(String userpw) {
-		this.userpw = userpw;
+	public void setPassword(String password) {
+		this.password = password;
 	}
-	public String getUserName() {
-		return userName;
+	public String getNickname() {
+		return nickname;
 	}
-	public void setUserName(String userName) {
-		this.userName = userName;
-	}
-	public boolean isEnabled() {
-		return enabled;
-	}
-	public void setEnabled(boolean enabled) {
-		this.enabled = enabled;
-	}
-	public Date getRegDate() {
-		return regDate;
-	}
-	public void setRegDate(Date regDate) {
-		this.regDate = regDate;
-	}
-	public Date getUpdateDate() {
-		return updateDate;
-	}
-	public void setUpdateDate(Date updateDate) {
-		this.updateDate = updateDate;
+	public void setNickname(String nickname) {
+		this.nickname = nickname;
 	}
 	public List<AuthVO> getAuthList() {
 		return authList;
 	}
 	public void setAuthList(List<AuthVO> authList) {
 		this.authList = authList;
+	}
+	public void addAuth(String auth) {
+		if(authList == null) {
+			authList = new ArrayList<>();
+		}
+		authList.add(new AuthVO(email, auth));
+	}
+	public void encodePassword(PasswordEncoder pwencoder) {
+		setPassword(pwencoder.encode(password));
+	}
+	
+	@Override
+	public String toString() {
+		return "MemberVO [email=" + email + ", password=" + password + ", nickname=" + nickname + ", authList="
+				+ authList + "]";
 	}
 	
 }

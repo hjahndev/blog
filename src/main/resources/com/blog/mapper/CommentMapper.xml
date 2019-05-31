@@ -19,7 +19,7 @@
 	</update>
 
 	<select id="getList" resultType="com.blog.vo.CommentVO">
-		SELECT cno, pno, content as comment, writer, regDate, updatedate 
+		SELECT cno, pno, content as "comment", writer, regDate, updatedate 
 		  FROM (
 				SELECT /*+INDEX_ASC(tbl_comment pk_comment) */
 					  rownum as rn, cno, pno, content, writer, regDate, updatedate 

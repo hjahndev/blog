@@ -82,7 +82,7 @@
 						<div class="form-group col-4">
 						  <sec:authorize access="isAuthenticated()">
 							<input type="text" class="form-control" name="writer"
-							 value='<sec:authentication property="principal.username"/>' readonly>
+							 value='<sec:authentication property="principal.member.nickname"/>' readonly>
 						  </sec:authorize>
 						  <sec:authorize access="isAnonymous()">
 							<input type="text" class="form-control" placeholder="이름" name="writer" required>

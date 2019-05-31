@@ -5,25 +5,53 @@
 <mapper namespace="com.blog.mapper.MemberMapper">
 
 	<resultMap type="com.blog.vo.MemberVO" id="memberMap">
-		<result property="userid" column="userid"/>
-		<result property="userpw" column="userpw"/>
-		<result property="userName" column="username"/>
-		<result property="regDate" column="regdate"/>
-		<result property="updateDate" column="updatedate"/>
+		<result property="email" column="email"/>
+		<result property="password" column="password"/>
+		<result property="nickname" column="nickname"/>
 		<collection property="authList" resultMap="authMap">
 		</collection>
 	</resultMap>
 	
 	<resultMap type="com.blog.vo.AuthVO" id="authMap">
-		<result property="userid" column="userid"/>
+		<result property="email" column="email"/>
 		<result property="auth" column="auth"/>
 	</resultMap>
 	
 	<select id="checkUser" resultMap="memberMap">
-		SELECT mem.userid, userpw, username, enabled, regdate, updatedate, auth
-		  FROM tbl_member mem 
+		SELECT member.email, password, nickname, auth
+		  FROM tbl_member member 
 		LEFT OUTER JOIN tbl_member_auth auth
-		    ON mem.userid = auth.userid
-		 WHERE mem.userid = #{userid} 
+		    ON member.email = auth.email
+		 WHERE member.email = #{email} 
 	</select>
+	
+	<select id="forgotPassword">
+		SELECT member.email
+		  FROM tbl_member member 
+		LEFT OUTER JOIN tbl_member_auth auth
+		    ON member.email = auth.email
+		 WHERE member.email = #{email} 
+	</select>
+	
+	<insert id="join">
+		INSERT INTO tbl_member (email, password, nickname)
+		VALUES (#{email}, #{password}, #{nickname})
+    </insert>
+	
+	<insert id="addAuth">
+		INSERT INTO tbl_member_auth (email, auth)
+		VALUES (#{email}, #{auth})
+    </insert>
+    
+    <select id="checkNickname" resultType="int">
+    	SELECT COUNT(nickname)
+		  FROM tbl_member
+		 WHERE nickname = #{nickname}
+    </select>
+    
+    <select id="checkEmail" resultType="int">
+    	SELECT COUNT(email)
+		  FROM tbl_member
+		 WHERE email = #{email}
+    </select>
 </mapper>

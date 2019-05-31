@@ -6,9 +6,9 @@
 
   <select id="getList" resultType="com.blog.vo.PostVO">
 	<![CDATA[
-		SELECT /*+INDEX_DESC(blog blog_pno_pk) */
+		SELECT /*+INDEX_DESC(tbl_blog blog_pno_pk) */
 			   pno, title,  regexp_substr(content,'[^('||chr(13)||chr(10)||')]+',1,1) as content, writer, regDate
-		  FROM blog 
+		  FROM tbl_blog 
 		 WHERE 1 = 1
 	]]>
   </select>
@@ -18,10 +18,10 @@
 		SELECT 
 			   pno, title,  content, writer, regDate
 		  FROM ( 
-		  		SELECT /*+INDEX_DESC(blog blog_pno_pk) */
+		  		SELECT /*+INDEX_DESC(tbl_blog blog_pno_pk) */
 			           rownum as rn, pno, title,  regexp_substr(content,'[^('||chr(13)||chr(10)||')]+',1,1) as content, 
 			           writer, regDate
-			      FROM blog
+			      FROM tbl_blog
 			     WHERE rownum <= #{page} * #{countPerPage}
 			    )
 		 WHERE rn > (#{page} - 1) * #{countPerPage}
@@ -30,26 +30,26 @@
   
   <select id="getTotal" resultType="int">
 	SELECT count(*)
-	  FROM blog
+	  FROM tbl_blog
   </select>
 
   <select id="get" resultType="com.blog.vo.PostVO">
 	SELECT pno, title, content, writer, regDate 
-	  FROM blog 
+	  FROM tbl_blog 
 	 WHERE pno = #{pno}
   </select>
   
   <insert id="insert">
-	INSERT INTO blog (pno, title, content, writer)
+	INSERT INTO tbl_blog (pno, title, content, writer)
 	VALUES (seq_blog.nextval, #{title}, #{content}, #{writer})
   </insert>
 
   <delete id="delete">
-	DELETE blog WHERE pno = #{pno}
+	DELETE tbl_blog WHERE pno = #{pno}
   </delete>
 
   <update id="update">
-	UPDATE blog
+	UPDATE tbl_blog
 	   SET title = #{title},
 		   content = #{content},
 		   writer = #{writer},

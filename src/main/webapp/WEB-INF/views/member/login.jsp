@@ -25,15 +25,15 @@
                   <form id="loginForm" class="user" method="post">
                     <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
                     <div class="form-group">
-                      <input type="text" class="form-control form-control-user" name="username" 
-                      placeholder="ID" required>
+                      <input type="email" class="form-control form-control-user" name="email" 
+                      placeholder="아이디(이메일)" required>
                       <div class="invalid-feedback">
- 	              		아이디를 입력해 주세요.
+ 	              		이메일을 입력해 주세요.
  	            	  </div>
                     </div>
                     <div class="form-group">
                       <input type="password" class="form-control form-control-user" name="password" 
-                      placeholder="Password" required>
+                      placeholder="비밀번호" required>
                       <div class="invalid-feedback">
  	              		비밀번호를 입력해 주세요.
  	            	  </div>
@@ -53,10 +53,10 @@
                     <hr>
                   </form>
                   <div class="text-center">
-                    <a class="small text-primary" href="forgot-password.html">비밀번호 찾기</a>
+                    <a class="small" href="/member/forgotPassword">비밀번호 찾기</a>
                   </div>
                   <div class="text-center">
-                    <a class="small text-primary" href="/join">회원가입</a>
+                    <a class="small" href="/member/join">회원가입</a>
                   </div>
                 </div>
               </div>

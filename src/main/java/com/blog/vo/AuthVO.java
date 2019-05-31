@@ -2,13 +2,17 @@ package com.blog.vo;
 
 public class AuthVO {
 
-	private String userid;	
+	private String email;	
 	private String auth;
-	public String getUserid() {
-		return userid;
+	public AuthVO(String email, String auth) {
+		this.email = email;
+		this.auth = auth;
 	}
-	public void setUserid(String userid) {
-		this.userid = userid;
+	public String getEmail() {
+		return email;
+	}
+	public void setEmail(String email) {
+		this.email = email;
 	}
 	public String getAuth() {
 		return auth;
@@ -16,4 +20,9 @@ public class AuthVO {
 	public void setAuth(String auth) {
 		this.auth = auth;
 	}	
+	
+	@Override
+	public String toString() {
+		return "AuthVO [email=" + email + ", auth=" + auth + "]";
+	}
 }

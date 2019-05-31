@@ -18,7 +18,9 @@ xsi:schemaLocation="http://www.springframework.org/schema/security
     
 	<security:http>
 		<security:access-denied-handler ref="customAccessDenied"/>
-		<security:form-login login-page="/member/login"
+		<security:form-login 
+		login-page="/member/login"
+		username-parameter="email"
 		authentication-failure-handler-ref="customAuthenticationFailureHandler"/>
 		<security:logout logout-url="/member/logout" invalidate-session="true" delete-cookies="remember-me,JSESSION_ID"/>
 		<security:remember-me data-source-ref="dataSource" token-validity-seconds="604800" />
@@ -30,5 +32,4 @@ xsi:schemaLocation="http://www.springframework.org/schema/security
 		</security:authentication-provider>
 	</security:authentication-manager>
 
-	<security:global-method-security secured-annotations="enabled" />
 </beans>

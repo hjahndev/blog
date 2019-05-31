@@ -85,6 +85,7 @@ public class PostController {
 		return "post/modify";
 	}
 	
+	@PreAuthorize("hasRole('ROLE_ADMIN')")
 	@GetMapping("/register")
 	public String writeForm() {
 		return "post/register";
