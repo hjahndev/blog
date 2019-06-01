@@ -6,7 +6,7 @@
 
   <select id="getList" resultType="com.blog.vo.PostVO">
 	<![CDATA[
-		SELECT /*+INDEX_DESC(tbl_blog blog_pno_pk) */
+		SELECT /*+INDEX_DESC(blog blog_pno_pk) */
 			   pno, title,  regexp_substr(content,'[^('||chr(13)||chr(10)||')]+',1,1) as content, writer, regDate
 		  FROM tbl_blog 
 		 WHERE 1 = 1
@@ -16,14 +16,16 @@
   <select id="getListWithPage" resultType="com.blog.vo.PostVO">
 	<![CDATA[
 		SELECT 
-			   pno, title,  content, writer, regDate
+			   pno, title,  content, writer, blog.regDate, mem.nickname as writerNickname
 		  FROM ( 
-		  		SELECT /*+INDEX_DESC(tbl_blog blog_pno_pk) */
+		  		SELECT /*+INDEX_DESC(blog blog_pno_pk) */
 			           rownum as rn, pno, title,  regexp_substr(content,'[^('||chr(13)||chr(10)||')]+',1,1) as content, 
 			           writer, regDate
-			      FROM tbl_blog
+			      FROM tbl_blog blog
 			     WHERE rownum <= #{page} * #{countPerPage}
-			    )
+			    ) blog
+	INNER JOIN tbl_member mem
+	        ON blog.writer = mem.email	    
 		 WHERE rn > (#{page} - 1) * #{countPerPage}
 	]]>
   </select>
@@ -34,8 +36,10 @@
   </select>
 
   <select id="get" resultType="com.blog.vo.PostVO">
-	SELECT pno, title, content, writer, regDate 
-	  FROM tbl_blog 
+	SELECT pno, title, content, writer, blog.regDate, mem.nickname as writerNickname 
+	  FROM tbl_blog blog
+INNER JOIN tbl_member mem
+        ON blog.writer = mem.email    
 	 WHERE pno = #{pno}
   </select>
   
@@ -52,7 +56,6 @@
 	UPDATE tbl_blog
 	   SET title = #{title},
 		   content = #{content},
-		   writer = #{writer},
 		   updateDate = sysdate
 	 WHERE pno = #{pno}
   </update>

@@ -2,6 +2,8 @@ package com.blog.vo;
 
 import java.util.Date;
 
+import org.springframework.security.crypto.password.PasswordEncoder;
+
 public class CommentVO {
 	private Long cno;
 	private Long pno;
@@ -10,6 +12,8 @@ public class CommentVO {
 	private String writer;
 	private Date regDate;
 	private Date updateDate;
+	private String writerNickname;
+	
 	public Long getCno() {
 		return cno;
 	}
@@ -51,6 +55,15 @@ public class CommentVO {
 	}
 	public void setUpdateDate(Date updateDate) {
 		this.updateDate = updateDate;
+	}
+	public String getWriterNickname() {
+		return writerNickname;
+	}
+	public void setWriterNickname(String writerNickname) {
+		this.writerNickname = writerNickname;
+	}
+	public void encodePassword(PasswordEncoder pwencoder) {
+		setPassword(pwencoder.encode(password));
 	}
 	
 	@Override

@@ -11,7 +11,7 @@ $(document).ready(function(){
 	$('#removeBtn').on('click', function(){
 		$('#removeModal').modal('show');
 		$('#removeModal').find('input[name=pno]').attr('value', $('#pno').val());
-		$('#removeModal').find('input[name=writer]').attr('value', $('input[name=writer]').val());
+		$('#removeModal').find('input[name=writer]').attr('value', $('input[name=writer]').data('user'));
 	});
 	
 	$('#postRemoveBtn').on('click', function(){

@@ -77,6 +77,7 @@ public class PostController {
 		return "redirect:/list";
 	}
 	
+	@PreAuthorize("hasRole('ROLE_ADMIN')")
 	@GetMapping({"/modify"})
 	public String updateForm(@RequestParam("pno") Long pno,@RequestParam("rows") int rows, Model model) {
 		logger.info("/updateForm");

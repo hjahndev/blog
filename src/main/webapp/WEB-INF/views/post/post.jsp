@@ -15,7 +15,7 @@
 					<c:out value="${post.title}" />
 				</h1>
 				<span class="meta"><a href="#">
-					<c:out value="${post.writer}" /></a> on 
+					<c:out value="${post.writerNickname}" /></a> on 
 					<fmt:formatDate pattern="yyyy-MM-dd" value="${post.regdate}" />
 				</span>
 			</div>
@@ -45,11 +45,10 @@
 		<div class="col-lg-8 col-md-10 mx-auto">
 			<div class=" text-center">
 			    <input id="pno" name="pno" type="hidden" value="${post.pno}">
-			    <input name="writer" type="hidden" value="${post.writer}">
 				<ul class="list-inline text-center">
-				  <sec:authentication property="principal" var="pinfo"/>
 	  	    	  <sec:authorize access="isAuthenticated()">
-	  	  	  		<c:if test="${pinfo.username eq post.writer}">
+	  	    	  	<sec:authentication var="userEmail" property="principal.member.email"/>
+	  	  	  		<c:if test="${userEmail eq post.writer}">
 					  <li class="list-inline-item">
 						<button type="submit" class="btn btn-outline-primary btn-sm"
 							id="updateFormBtn">수정</button>
@@ -82,10 +81,11 @@
 						<div class="form-group col-4">
 						  <sec:authorize access="isAuthenticated()">
 							<input type="text" class="form-control" name="writer"
+							 data-user='<sec:authentication property="principal.member.email"/>'
 							 value='<sec:authentication property="principal.member.nickname"/>' readonly>
 						  </sec:authorize>
 						  <sec:authorize access="isAnonymous()">
-							<input type="text" class="form-control" placeholder="이름" name="writer" required>
+							<input type="text" class="form-control" placeholder="이름" name="writer" data-user="" required>
 							<div class="invalid-feedback">
 						  	  이름을 입력해 주세요. 
 							</div>

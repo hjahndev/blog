@@ -12,6 +12,10 @@
 		DELETE FROM tbl_comment WHERE cno = #{cno}
 	</delete>
 	
+	<delete id="deleteAll">
+		DELETE FROM tbl_comment WHERE pno = #{pno}
+	</delete>
+	
 	<update id="update">
 		UPDATE tbl_comment 
 		SET content = #{comment}, updatedate = sysdate 
@@ -19,12 +23,23 @@
 	</update>
 
 	<select id="getList" resultType="com.blog.vo.CommentVO">
-		SELECT cno, pno, content as "comment", writer, regDate, updatedate 
+		SELECT cno, pno, content as "comment", writer, 
+		 	   com.regDate, com.updatedate, mem.nickname as writerNickname 
 		  FROM (
 				SELECT /*+INDEX_ASC(tbl_comment pk_comment) */
-					  rownum as rn, cno, pno, content, writer, regDate, updatedate 
-		  		  FROM tbl_comment 
+					  rownum as rn, cno, pno, content, writer, 
+					  regDate, updatedate 
+		  		  FROM tbl_comment
 		 		 WHERE pno = #{pno}
-		 	   )
+		 	   ) com
+	 LEFT JOIN tbl_member mem
+	        ON com.writer = mem.email
+	  ORDER BY com.rn  	   
+	</select>
+	
+	<select id="countComments" resultType="int">
+		SELECT count(cno) 
+		  FROM tbl_comment
+		 WHERE pno = #{pno}
 	</select>
 </mapper>  

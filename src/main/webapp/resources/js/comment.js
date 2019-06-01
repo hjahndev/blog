@@ -7,9 +7,13 @@ $(document).ready(function(){
 			form.classList.add('was-validated');
 			return;
 		}		
+		let writer = $('textarea[name=writer]').val();
+		if($('input[name=writer]').data('user') !== "") {
+			writer = $('input[name=writer]').data('user');
+		}
 		let comment = {
 			'comment' :	$('textarea[name=comment]').val(),
-			'writer' : $('input[name=writer]').val(),
+			'writer' : writer,
 			'password' : $('input[name=password]').val(),
 			'pno': $('input[name=pno]').val()
 		}
@@ -33,7 +37,7 @@ $(document).ready(function(){
 
 	//댓글 수정 화면
 	$('.container.comment-list').on('click', '.commentModify', function() {
-		var comment = $(this).parents('.control-group.comment-list').find('.comment');
+		let comment = $(this).parents('.control-group.comment-list').find('.comment');
 		comment.before('<textarea class="form-control comment" name="comment">'+comment.html().replace('<br>','\n')+'</textarea>');
 		comment.before('<a class="text-info" name="modifyCommentBtn">'+'수정'+'</a>');
 		comment.before('<a class="text-info" name="cancelModifyBtn">'+'취소'+'</a>');
@@ -106,7 +110,7 @@ function removeInvalidFeedback(textarea) {
 	}	
 }
 function addCommentButton(event) {
-	var div = $('<div class="commentButton"></div>');
+	let div = $('<div class="commentButton"></div>');
 	//div.append('<span class="commentReply">댓글</span>');
 	div.append('<span class="commentModify">수정</span>');
 	div.append('<span class="commentRemove">삭제</span>');
@@ -169,9 +173,13 @@ function showComments() {
 	var formGroup = $('<div class="form-group"></div>');
 	$.getJSON('/comment/' + $('input[name=pno]').val(), function(data) {
 		$.each(data, function(index, item) {
-			var controlGroup = $('<div class="control-group comment-list"></div>');
-			var row = $('<div class="form-row"></div>');
-			row.append(formGroup.clone().html('<span class="comment-writer">'+item.writer+'</span>'));
+			let controlGroup = $('<div class="control-group comment-list"></div>');
+			let row = $('<div class="form-row"></div>');
+			let writer = item.writerNickname;
+			if(writer === null) {
+				writer = item.writer;
+			}
+			row.append(formGroup.clone().html('<span class="comment-writer">'+writer+'</span>'));
 			row.append(formGroup.clone().html('<span class="comment-date">'+displayTime(item.regDate)+'</span>'));
 			controlGroup.append(row);
 			controlGroup.append(formGroup.clone().html('<div class="comment">'+item.comment.replace('\n', '<br>')
@@ -185,22 +193,22 @@ function showComments() {
 }
 
 function displayTime(timeValue) {
-	var today = new Date();
-	var gap = today.getTime() - timeValue;
-	var dateObj = new Date(timeValue);
-	var str = '';
+	let today = new Date();
+	let gap = today.getTime() - timeValue;
+	let dateObj = new Date(timeValue);
+	let str = '';
 	
 	if (gap < (1000 * 60 * 60 * 24)) {//하루 안 됨
-		var hh = dateObj.getHours();
-		var mi = dateObj.getMinutes();
-		var ss = dateObj.getSeconds();
+		let hh = dateObj.getHours();
+		let mi = dateObj.getMinutes();
+		let ss = dateObj.getSeconds();
 		
 		return [ (hh > 9 ? '': '0') + hh, ':', (mi > 9 ? '' : '0') + mi,
 			':', (ss > 9 ? '': '0') + ss ].join('');
 	} else {
-		var yy = dateObj.getFullYear();
-		var mm = dateObj.getMonth() + 1; //getMonth() is zero-based
-		var dd = dateObj.getDate();
+		let yy = dateObj.getFullYear();
+		let mm = dateObj.getMonth() + 1; //getMonth() is zero-based
+		let dd = dateObj.getDate();
 		
 		return [ yy, '/', (mm > 9 ? '': '0') + mm, '/',
 			(dd > 9 ? '' : '0') + dd ].join('');

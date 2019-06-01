@@ -22,10 +22,6 @@ public class MemberServiceImpl implements MemberService {
 	public MemberServiceImpl(MemberMapper mapper) {
 		this.mapper = mapper;
 	}
-	
-	public void setPwencoder(PasswordEncoder pwencoder) {
-		this.pwencoder = pwencoder;
-	}
 
 	@Transactional
 	@Override
@@ -43,7 +39,6 @@ public class MemberServiceImpl implements MemberService {
 
 	@Override
 	public boolean forgotPassword(MemberVO vo) {
-		//해당 닉네임, 이메일 가진 사람 있는지 확인
 		//새 비번 만들어서 암호화하고 이메일 보줌 or 비번변경 화면 링크 보내줌
 		return false;
 	}

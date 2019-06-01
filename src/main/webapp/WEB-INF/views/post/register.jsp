@@ -21,7 +21,7 @@
       <div class="col-lg-8 col-md-10 mx-auto">
         <form method="post" id="registerForm" novalidate>
           <sec:authorize access="hasRole('ADMIN')">
-            <input type="hidden" name="writer" value='<sec:authentication property="principal.member.nickname"/>'>
+            <input type="hidden" name="writer" value='<sec:authentication property="principal.member.email"/>'>
           </sec:authorize>
           <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
           <div class="control-group">

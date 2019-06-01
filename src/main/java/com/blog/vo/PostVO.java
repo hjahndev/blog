@@ -10,6 +10,7 @@ public class PostVO {
 	private String writer;
 	private Date regdate;
 	private Date updateDate;
+	private String writerNickname;
 	
 	public Long getPno() {
 		return pno;
@@ -47,7 +48,13 @@ public class PostVO {
 	public void setUpdateDate(Date updateDate) {
 		this.updateDate = updateDate;
 	}
-
+	public String getWriterNickname() {
+		return writerNickname;
+	}
+	public void setWriterNickname(String writerNickname) {
+		this.writerNickname = writerNickname;
+	}
+	
 	@Override
 	public String toString() {
 		return "PostVO [pno=" + pno + ", title=" + title + "]";

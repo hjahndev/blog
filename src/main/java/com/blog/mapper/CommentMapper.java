@@ -14,4 +14,7 @@ public interface CommentMapper {
 
 	public int delete(Long cno);
 
+	public int deleteAll(Long pno);
+	
+	public int countComments(Long pno);
 }
