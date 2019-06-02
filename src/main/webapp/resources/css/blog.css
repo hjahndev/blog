@@ -211,3 +211,6 @@ p {
 .pagination {
 	margin-top: 3rem;
 }
+.modal-sm {
+	max-width: 310px;
+}

@@ -2,7 +2,7 @@
     pageEncoding="UTF-8"%>
 <!-- Remove Comment Modal-->
 <div class="modal fade" id="removeCommentModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog" role="document">
+  <div class="modal-dialog modal-sm" role="document">
     <div class="modal-content">
       <div class="modal-header">
         <h6 class="modal-title">댓글 삭제</h6>
@@ -37,6 +37,34 @@
       <div class="modal-footer">
         <button class="btn btn-secondary btn-sm" type="button" data-dismiss="modal">취소</button>
         <button class="btn btn-primary btn-sm" type="button" id="postRemoveBtn">확인</button>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- Check Comment Password Modal-->
+<div class="modal fade" id="checkPasswordModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-sm" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h6 class="modal-title">댓글 비밀번호 확인</h6>
+        <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">×</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form method="post">
+      	  <input type="hidden" name="cno" value="">
+	   	  <div class="form-group row">
+	   	    <label class="col-sm-4 col-form-label text-right">비밀번호</label>
+	   	    <div class="col-sm-8">
+	   	      <input class="form-control" type="password" name="password">
+	   	    </div>
+	   	  </div>
+	   	</form>
+	  </div>
+      <div class="modal-footer">
+        <button class="btn btn-secondary btn-sm" type="button" data-dismiss="modal">취소</button>
+        <button class="btn btn-primary btn-sm" type="button" id="checkPasswordBtn">확인</button>
       </div>
     </div>
   </div>

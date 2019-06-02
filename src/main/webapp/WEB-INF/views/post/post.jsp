@@ -78,18 +78,21 @@
 						</div>
 					</div>
 					<div class="form-row">
+					  <sec:authorize access="isAuthenticated()">
+					    <input type="hidden" class="form-control" name="writer"
+						 data-user='<sec:authentication property="principal.member.email"/>'
+						 value='<sec:authentication property="principal.member.nickname"/>' readonly>
+						<div class="form-group col-12 text-right">
+							<button type="button" class="btn btn-primary btn-sm"
+								id="commentBtn">댓글 등록</button>
+						</div>
+					  </sec:authorize>
+					  <sec:authorize access="isAnonymous()">
 						<div class="form-group col-4">
-						  <sec:authorize access="isAuthenticated()">
-							<input type="text" class="form-control" name="writer"
-							 data-user='<sec:authentication property="principal.member.email"/>'
-							 value='<sec:authentication property="principal.member.nickname"/>' readonly>
-						  </sec:authorize>
-						  <sec:authorize access="isAnonymous()">
 							<input type="text" class="form-control" placeholder="이름" name="writer" data-user="" required>
 							<div class="invalid-feedback">
 						  	  이름을 입력해 주세요. 
 							</div>
-						  </sec:authorize>	
 						</div>
 						<div class="form-group col-4">
 							<input type="password" class="form-control" placeholder="비밀번호" name="password"
@@ -98,10 +101,11 @@
 						  	  비밀번호를 입력해 주세요. 
 							</div>
 						</div>
-						<div class="form-group col-4 text-right">
+						<div class="form-group col-4">
 							<button type="button" class="btn btn-primary btn-sm"
 								id="commentBtn">댓글 등록</button>
 						</div>
+					  </sec:authorize>	
 					</div>
 				</form>
 			</div>

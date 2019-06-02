@@ -17,4 +17,6 @@ public interface CommentMapper {
 	public int deleteAll(Long pno);
 	
 	public int countComments(Long pno);
+
+	public String checkPassword(CommentVO vo);
 }

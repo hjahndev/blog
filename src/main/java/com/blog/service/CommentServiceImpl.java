@@ -21,6 +21,7 @@ public class CommentServiceImpl implements CommentService {
 	public CommentServiceImpl(CommentMapper mapper) {
 		this.mapper = mapper;
 	}
+	
 	@Override
 	public List<CommentVO> getList(Long pno) {
 		return mapper.getList(pno);
@@ -41,6 +42,11 @@ public class CommentServiceImpl implements CommentService {
 	@Override
 	public boolean remove(Long cno) {
 		return mapper.delete(cno) == 1;
+	}
+	
+	@Override
+	public boolean checkPassword(CommentVO vo) {
+		return pwencoder.matches(vo.getPassword(), mapper.checkPassword(vo));
 	}
 
 }

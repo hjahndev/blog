@@ -10,4 +10,5 @@ public interface CommentService {
 	public boolean register(CommentVO vo);
 	public boolean modify(CommentVO vo);
 	public boolean remove(Long cno);
+	public boolean checkPassword(CommentVO vo);
 }

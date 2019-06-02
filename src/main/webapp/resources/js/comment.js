@@ -1,4 +1,6 @@
 $(document).ready(function(){
+	//회원 이메일
+	let user = $('#commentForm').find('input[name=writer]').data('user');
 	//댓글 입력
 	$('#commentBtn').on('click', function(e){
 		let form = document.getElementById('commentForm');
@@ -7,7 +9,7 @@ $(document).ready(function(){
 			form.classList.add('was-validated');
 			return;
 		}		
-		let writer = $('textarea[name=writer]').val();
+		let writer = $('input[name=writer]').val();
 		if($('input[name=writer]').data('user') !== "") {
 			writer = $('input[name=writer]').data('user');
 		}
@@ -24,11 +26,11 @@ $(document).ready(function(){
 		});
 	});
 
-	//댓글 수정, 삭제 글자 표시
+	//댓글 수정, 삭제 버튼 표시
 	$('.container.comment-list').on('mouseenter', '.control-group.comment-list', addCommentButton);
 	
 	$('.container.comment-list').on('mouseleave', '.control-group.comment-list', function() {
-		//댓글 수정, 삭제 글자 삭제
+		//댓글 수정, 삭제 버튼 삭제
 		$('.commentButton').remove();
 	});
 	
@@ -37,20 +39,26 @@ $(document).ready(function(){
 
 	//댓글 수정 화면
 	$('.container.comment-list').on('click', '.commentModify', function() {
-		let comment = $(this).parents('.control-group.comment-list').find('.comment');
-		comment.before('<textarea class="form-control comment" name="comment">'+comment.html().replace('<br>','\n')+'</textarea>');
-		comment.before('<a class="text-info" name="modifyCommentBtn">'+'수정'+'</a>');
-		comment.before('<a class="text-info" name="cancelModifyBtn">'+'취소'+'</a>');
-		comment.hide();
-		//'수정 삭제 댓글'글자 안나오게
-		$('.container.comment-list').off('mouseenter');
+		let target = $(this).parents('.control-group.comment-list');
+		//회원은 바로 수정 화면 보여주기(앞에서 본인 확인 함)
+		if(user !== '') {
+			showModifyForm(target);
+			return;
+		}
+		//비회원은 비번 맞을때 수정 화면 보여주기
+		let cno = target.find('input').val();
+		$('#checkPasswordModal').modal('show');
+		$('#checkPasswordModal').find('input[name=cno]').attr('value', cno);
+		$('#checkPasswordBtn').on('click', function() { 
+			checkCommentPassword(showModifyForm, target)
+		});
 	});
 	//댓글 수정 취소
 	$('.container.comment-list').on('click', 'a[name="cancelModifyBtn"]', function() {
 		$(this).parents('.control-group.comment-list').find('.comment').show();
 		$(this).siblings('textarea').remove();
 		$(this).siblings('a').remove();
-		//'수정 삭제 댓글' 글자 다시 나오도록
+		//'수정 삭제 댓글' 버튼 다시 나오도록
 		$('.container.comment-list').on('mouseenter', '.control-group.comment-list', addCommentButton);
 		$(this).remove();
 	});
@@ -69,14 +77,25 @@ $(document).ready(function(){
 		modifyComment(comment, function() {
 			showComments();
 		});
-		//'수정 삭제 댓글' 글자 다시 나오도록
+		//'수정 삭제 댓글' 버튼 다시 나오도록
 		$('.container.comment-list').on('mouseenter', '.control-group.comment-list', addCommentButton);
 	});
 	
+	//댓글 삭제
 	$('.container.comment-list').on('click', '.commentRemove', function() {
-		let cno = $(this).parents('.control-group.comment-list').find('input').val();
-		$('#removeCommentModal').modal('show');
-		$('#removeCommentModal').find('input').attr('value', cno);
+		let target = $(this).parents('.control-group.comment-list');
+		let cno = target.find('input').val();
+		//회원은 바로 삭제 확인 모달 보여주기(앞에서 본인 확인 함)
+		if(user !== '') {
+			showRemoveModal(cno);
+			return;
+		}
+		//비회원은 비번 맞을때 삭제 확인 모달 보여주기
+		$('#checkPasswordModal').modal('show');
+		$('#checkPasswordModal').find('input[name=cno]').attr('value', cno);
+		$('#checkPasswordBtn').on('click', function() { 
+			checkCommentPassword(showRemoveModal,cno);
+		});
 	});
 	
 	$('#commentRemoveBtn').on('click', function() {
@@ -87,12 +106,26 @@ $(document).ready(function(){
 		});
 	});
 	
-	
 	$('.container.comment-list').on('keydown keyup', 'textarea', function() {
 		removeInvalidFeedback($(this));
 		$(this).height(1).height($(this).prop('scrollHeight')+12);
 	});
 });
+
+function showRemoveModal(cno) {
+	$('#removeCommentModal').modal('show');
+	$('#removeCommentModal').find('input').attr('value', cno);
+}
+
+function showModifyForm(target) {
+	let comment = target.find('.comment');
+	comment.before('<textarea class="form-control comment" name="comment">'+comment.html().replace('<br>','\n')+'</textarea>');
+	comment.before('<a class="text-info" name="modifyCommentBtn">'+'수정'+'</a>');
+	comment.before('<a class="text-info" name="cancelModifyBtn">'+'취소'+'</a>');
+	comment.hide();
+	//수정, 삭제 버튼 안나오게
+	$('.container.comment-list').off('mouseenter');	
+}
 
 function addInvalidFeedback(textarea) {
 	if(!textarea.next().hasClass('invalid-feedback')) {
@@ -110,6 +143,12 @@ function removeInvalidFeedback(textarea) {
 	}	
 }
 function addCommentButton(event) {
+	//회원은 본인 글이 아닐 경우 수정, 삭제 버튼 보여주지 않음
+	let user = $('#commentForm').find('input[name=writer]').data('user');
+	let writer = $(event.currentTarget).find('.comment-writer').data('user');
+	if((user !== '') && (user !== writer)) {
+		return;
+	}
 	let div = $('<div class="commentButton"></div>');
 	//div.append('<span class="commentReply">댓글</span>');
 	div.append('<span class="commentModify">수정</span>');
@@ -117,6 +156,30 @@ function addCommentButton(event) {
 	$(event.currentTarget).append(div);
 }
 
+function checkCommentPassword(callback, callbackParam){
+	let data = {
+			'cno': $('#checkPasswordModal').find('input[name=cno]').val(),	
+			'password': $('#checkPasswordModal').find('input[name=password]').val()
+		}
+	$.ajax({
+		type : 'POST',
+		url : '/comment/checkPassword',
+		data : JSON.stringify(data),
+		contentType : 'application/json; charset=utf-8',
+		success: function(result, status, xhr) {
+			if(result === "correct") {
+				callback(callbackParam);
+			} else {
+				alert("비밀번호가 맞지 않습니다.");
+			}
+		},
+		error : function(request, status, error) {
+			console.log('code:'+request.status+'\n'+'message:'+request.responseText+'\n'+'error:'+error);
+		}
+	})
+	$('#checkPasswordModal').modal('hide');
+	$('#checkPasswordModal').find('form')[0].reset();
+}
 function addComment(comment, callback, error){
 	$.ajax({
 		type : 'POST',
@@ -175,11 +238,11 @@ function showComments() {
 		$.each(data, function(index, item) {
 			let controlGroup = $('<div class="control-group comment-list"></div>');
 			let row = $('<div class="form-row"></div>');
-			let writer = item.writerNickname;
-			if(writer === null) {
-				writer = item.writer;
+			if(item.writerNickname === null) {
+				row.append(formGroup.clone().html('<span class="comment-writer">'+item.writer+'</span>'));
+			} else {
+				row.append(formGroup.clone().html('<span class="comment-writer" data-user="'+item.writer+'">'+item.writerNickname+'</span>'));
 			}
-			row.append(formGroup.clone().html('<span class="comment-writer">'+writer+'</span>'));
 			row.append(formGroup.clone().html('<span class="comment-date">'+displayTime(item.regDate)+'</span>'));
 			controlGroup.append(row);
 			controlGroup.append(formGroup.clone().html('<div class="comment">'+item.comment.replace('\n', '<br>')
