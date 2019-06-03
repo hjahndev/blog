@@ -5,9 +5,9 @@
 <!-- Begin Page Content -->
 <div class="container-fluid">
 	<div class="text-center">
-	<div class="error mx-auto" data-text="404">Access Denied Page</div>
-	<h2><c:out value="${SPRING_SECURITY_403_EXCEPTION.getMessage()}" /></h2>
-	<h2><c:out value="${msg}"/></h2>
+	<div class="error mx-auto">Access Denied Page</div>
+	<p class="lead text-gray-800 mb-5"><c:out value="${SPRING_SECURITY_403_EXCEPTION.getMessage()}" /></p>
+	<p class="text-gray-800 mb-0"><c:out value="${msg}"/></p>
 	</div>	
 </div>    
 

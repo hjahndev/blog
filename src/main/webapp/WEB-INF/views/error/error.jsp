@@ -7,9 +7,9 @@
 
   <!-- 404 Error Text -->
   <div class="text-center">
-    <div class="error mx-auto" data-text="404">404</div>
-    <p class="lead text-gray-800 mb-5">Page Not Found</p>
-    <p class="text-gray-800 mb-0">페이지가 없습니다.</p>
+    <div class="error mx-auto"><c:out value="${code}"/></div>
+    <p class="lead text-gray-800 mb-5"><c:out value="${msg}"/></p>
+    <p class="text-gray-800 mb-0"><c:out value="${explain}"/></p>
   </div>
 
 </div>
