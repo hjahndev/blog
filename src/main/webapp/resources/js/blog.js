@@ -2,6 +2,7 @@ $(document).ready(function(){
 	if($('span.comment').length){
 		showComments();
 	}
+	checkPagenation();
 	
 	$('.read').on('click', function(e){
 		e.preventDefault();
@@ -79,6 +80,14 @@ $(document).ready(function(){
 		$("#pageForm").submit();
 	});
 });
+function checkPagenation() {
+	if($('.active').find('a').attr('href') === '1') {
+		$('ul li:first-child').addClass('disabled');
+	}
+	if($('.active').find('a').attr('href') === '3') {
+		$('ul li:last-child').addClass('disabled');
+	}
+}
 
 function countTextRows(postText){
 	const lengthOfOneRow = 45;
