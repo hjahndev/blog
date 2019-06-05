@@ -2,7 +2,6 @@ package com.blog.controller;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.http.MediaType;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -16,6 +15,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.blog.service.MemberService;
 import com.blog.vo.MemberVO;
+import com.blog.vo.TokenVO;
 
 @Controller
 @RequestMapping(value = "/member")
@@ -60,7 +60,7 @@ public class MemberController {
 				produces = "application/text;charset=utf8")
 	public String checkNickname(@PathVariable("nickname") String nickname) {
 		logger.info("닉네임 중복체크: {}", nickname);
-		if(service.checkNickname(nickname) == 1) { 
+		if(service.checkNickname(nickname)) { 
 			return "duplicate";
 		}
 		return "original";
@@ -71,19 +71,43 @@ public class MemberController {
 				produces = "application/text;charset=utf8")
 	public String checkEmail(@RequestParam("email") String email) {
 		logger.info("이메일 중복체크: {}", email);
-		if(service.checkEmail(email) == 1) { 
+		if(service.checkEmail(email)) { 
 			return "duplicate";
 		}
 		return "original";
 	}
 	
-	@PostMapping(value = "/forgotPassword")
-	public String forgotPassword(MemberVO vo, Model model) {
-		logger.info("비밀번호 찾기");
-		if(service.forgotPassword(vo)) {
-			model.addAttribute("resetPassword", "success");
+	@ResponseBody
+	@GetMapping(value = "/passwordEmail", consumes = "application/json",
+				produces = "application/text;charset=utf8")
+	public String forgotPassword(@RequestParam("email") String email) {
+		logger.info("비밀번호 찾기 {}", email);
+		if(!service.checkEmail(email)) {
+			logger.info("등록되지 않은 이메일");
+			return "등록되지 않은 이메일입니다.";
+		}	
+		if(service.forgotPassword(email)) {
+			return "메일을 발송했습니다.";
 		}
-		return "/member/login";
+		return "메일을 발송할 수 없습니다.";
+	}
+	
+	@GetMapping(value = "/resetPassword")
+	public String resetPasswordForm(TokenVO vo, Model model) {
+		logger.info("비밀번호 재설정 화면: {}", vo);
+		if(!service.checkToken(vo)) {
+			return "/error/invalidToken";
+		}
+		model.addAttribute("token", vo.getToken());
+		model.addAttribute("email", vo.getEmail());
+		return "/member/reset-password";
+	}
+	
+	@PostMapping(value = "/resetPassword")
+	public String resetPassword(MemberVO vo, TokenVO token, Model model) {
+		logger.info("비밀번호 재설정: {} {}", vo, token);
+		service.resetPassword(vo, token);
+		return "/member/resetSuccess";
 	}
 	
 	@RequestMapping(value = "/accessError", method = {RequestMethod.GET, RequestMethod.POST})

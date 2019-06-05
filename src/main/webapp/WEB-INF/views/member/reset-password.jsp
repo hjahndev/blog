@@ -20,19 +20,23 @@
                 <h1 class="h4 text-gray-900 mb-4">비밀번호 재설정</h1>
               </div>
               <form class="user" id="resetPasswordForm" method="post">
+                <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
+                <input type="hidden" name="email" value="${email}" />
+                <input type="hidden" name="token" value="${token}" />
                 <div class="form-group">
                   <input type="password" class="form-control form-control-user" name="password" 
-                   placeholder="비밀번호" required>
-                  <div class="invalid-feedback">
- 	            	비밀번호를 입력해 주세요.
- 	              </div>
+                   placeholder="비밀번호" id="resetPassword" required>
+                   <div class="password-feedback">
+                   </div>
+                   <div class="invalid-feedback">
+ 	            	비밀번호를 새로 설정한 후에 로그인 페이지로 이동합니다.
+ 	               </div>
                 </div>
                 <div class="form-group">
                   <input type="password" class="form-control form-control-user" name="repeatPassword"
                    placeholder="비밀번호 재입력" required>
-                  <div class="password-feedback">
-                  	비밀번호와 다릅니다.
-                  </div> 
+                  <div class="repeat-password-feedback">
+                  </div>                   
                   <div class="invalid-feedback">
 					비밀번호를 재입력해 주세요.
  	              </div>

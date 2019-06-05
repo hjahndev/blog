@@ -30,7 +30,7 @@
  	              	  </div>
                     </div>  
                     <button id="forgotPasswordBtn" class="btn btn-primary btn-user btn-block">
-                      	비밀번호 재설정
+                      	입력
                     </button>
                   </form>
                   <hr>

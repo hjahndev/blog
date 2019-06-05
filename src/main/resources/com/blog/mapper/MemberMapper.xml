@@ -42,7 +42,29 @@
 		INSERT INTO tbl_member_auth (email, auth)
 		VALUES (#{email}, #{auth})
     </insert>
-    
+	
+	<insert id="addToken">
+		INSERT INTO resetpw_token (token, email)
+		VALUES (#{token}, #{email})
+    </insert>
+	
+	<delete id="deleteToken">
+		DELETE resetpw_token WHERE token = #{token}
+	</delete>
+	   
+    <select id="checkToken" resultType="int">
+    	SELECT COUNT(token)
+		  FROM resetpw_token
+		 WHERE token = #{token}
+		   AND email = #{email}
+    </select>
+	   
+	<update id="resetPassword">
+		UPDATE tbl_member
+		SET password = #{password}, updatedate = sysdate 
+		WHERE email = #{email}
+	</update>
+	   
     <select id="checkNickname" resultType="int">
     	SELECT COUNT(nickname)
 		  FROM tbl_member
