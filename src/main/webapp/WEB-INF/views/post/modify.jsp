@@ -22,15 +22,10 @@
           <input name="writer" type="hidden" value="${post.writer}">
           <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
           <div class="control-group">
-            <div class="form-group row">
-              <label class="col-sm-2 col-form-label">제목</label>
-              <div class="col-sm-10">
-              	<input type="text" class="form-control" name="title"
-              	value='<c:out value="${post.title}"/>' required>
- 	            <div class="invalid-feedback">
- 	              	제목을 입력해 주세요.
- 	            </div>
-              </div>
+           	<input type="text" class="form-control" name="title"
+           	value='<c:out value="${post.title}"/>' required>
+            <div class="invalid-feedback">
+              	제목을 입력해 주세요.
             </div>
           </div>
           <div class="control-group">
