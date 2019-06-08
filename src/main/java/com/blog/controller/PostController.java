@@ -43,7 +43,11 @@ public class PostController {
 	@GetMapping({"/post"})
 	public String read(@RequestParam("pno") Long pno, Model model) {
 		logger.info("post: {}", pno);
-		model.addAttribute("post", service.get(pno));
+		PostVO vo = service.get(pno);
+		if(vo == null) {
+			return "error/404";
+		}
+		model.addAttribute("post", vo);
 		return "post/post";
 	}
 	
