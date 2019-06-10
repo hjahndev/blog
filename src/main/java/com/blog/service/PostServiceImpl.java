@@ -10,6 +10,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.blog.mapper.CommentMapper;
 import com.blog.mapper.PostMapper;
+import com.blog.vo.LinkVO;
 import com.blog.vo.PageSettingVO;
 import com.blog.vo.PostVO;
 
@@ -63,5 +64,10 @@ public class PostServiceImpl implements PostService {
 	@Override
 	public int getTotal() {
 		return mapper.getTotal();
+	}
+
+	@Override
+	public LinkVO getLink(Long pno) {
+		return mapper.getLink(pno);
 	}
 }

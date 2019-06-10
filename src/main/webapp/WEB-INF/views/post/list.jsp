@@ -25,7 +25,7 @@
         <hr>
       </c:forEach>		
       <!-- 블로그 목록 끝 -->
-      <form id="pageForm" method="get" action="/list">
+      <form id="pageForm" method="get">
       	<input type="hidden" name="countPerPage" value="5" />
       	<input type="hidden" name="page" value="" />
       </form>

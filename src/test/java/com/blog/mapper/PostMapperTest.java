@@ -1,5 +1,7 @@
 package com.blog.mapper;
 
+import static org.junit.Assert.*;
+
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.slf4j.Logger;
@@ -8,10 +10,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
+import com.blog.vo.LinkVO;
 import com.blog.vo.PostVO;
 
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration("file:src/main/webapp/WEB-INF/spring/root-context.xml")
+@ContextConfiguration({"file:src/main/webapp/WEB-INF/spring/root-context.xml",
+"file:src/main/webapp/WEB-INF/spring/security-context.xml"})
 public class PostMapperTest {
 	private static final Logger logger = LoggerFactory.getLogger(PostMapperTest.class);
 
@@ -50,6 +54,16 @@ public class PostMapperTest {
 		post.setContent("Mapper 수정 테스트");
 		post.setWriter("Mapper 수정 테스트");
 		logger.info("result: {}", mapper.update(post));
+	}
+	
+	@Test
+	public void testGetLink() {
+		assertNotNull(mapper.getLink(121L));
+		LinkVO vo = new LinkVO();
+		vo.setPrevPno(23L);
+		vo.setNextPno(95L);
+		assertEquals(vo.getPrevPno(), mapper.getLink(94L).getPrevPno());
+		assertEquals(vo.getNextPno(), mapper.getLink(94L).getNextPno());
 	}
 
 }

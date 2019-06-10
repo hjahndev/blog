@@ -214,3 +214,9 @@ p {
 .modal-sm {
 	max-width: 310px;
 }
+.text-xs {
+    font-size: .8rem;
+}
+.card {
+	margin-top: 50px;
+}

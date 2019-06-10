@@ -6,12 +6,15 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.blog.service.PostService;
+import com.blog.vo.LinkVO;
 import com.blog.vo.PageSettingVO;
 import com.blog.vo.PagingVO;
 import com.blog.vo.PostVO;
@@ -40,14 +43,15 @@ public class PostController {
 		return "post/list";
 	}
 	
-	@GetMapping({"/post"})
-	public String read(@RequestParam("pno") Long pno, Model model) {
+	@GetMapping({"/post/{pno}"})
+	public String read(@PathVariable("pno") Long pno, PageSettingVO pageSet, Model model) {
 		logger.info("post: {}", pno);
 		PostVO vo = service.get(pno);
 		if(vo == null) {
 			return "error/404";
 		}
 		model.addAttribute("post", vo);
+		model.addAttribute("pageSet", pageSet);
 		return "post/post";
 	}
 	
@@ -88,6 +92,13 @@ public class PostController {
 		model.addAttribute("post", service.get(pno));
 		model.addAttribute("rows", rows);
 		return "post/modify";
+	}
+	
+	@ResponseBody
+	@GetMapping(value="/getLink/{pno}")
+	public LinkVO getLink(@PathVariable("pno") Long pno) {
+		logger.info("이전글, 다음글 찾기: {}", pno);
+		return service.getLink(pno);
 	}
 	
 	@PreAuthorize("hasRole('ROLE_ADMIN')")

@@ -1,12 +1,16 @@
 $(document).ready(function(){
-	if($('span.comment').length){
+	if($('article').length){//post.jsp 일때
 		showComments();
+		showPrevNext();
 	}
 	checkPagenation();
 	
 	$('.read').on('click', function(e){
 		e.preventDefault();
-		location.replace('/post?pno='+$(this).attr('href'));
+		//페이징 추가
+		$("#pageForm").find("input[name=page]").val($('.active').find('a').attr('href'));
+		$("#pageForm").attr('action', '/post/'+$(this).attr('href'));
+		$("#pageForm").submit();
 	});
 	
 	$('#removeBtn').on('click', function(){
@@ -77,7 +81,17 @@ $(document).ready(function(){
 	$('.page-link').on('click', function() {
 		event.preventDefault();
 		$("#pageForm").find("input[name=page]").val($(this).attr("href"));
-		$("#pageForm").submit();
+		$("#pageForm").attr('action', '/list').submit();
+	});
+	
+	$('#previousList').on('click', function() {
+		event.preventDefault();
+		$("#pageForm").attr('action', '/list').submit();
+	});
+	
+	$('.card').on('click', 'a', function() {
+		event.preventDefault();
+		$("#pageForm").attr('action', '/post/'+$(this).attr('href')).submit();
 	});
 });
 function checkPagenation() {
@@ -100,4 +114,21 @@ function countTextRows(postText){
 		rows += 1;
 	});
 	return rows;
+}
+
+function showPrevNext() {
+	$.getJSON('/getLink/' + $('#pno').val(), function(data) {
+		console.log(data);
+		$('.next').hide();
+		$('.prev').hide();
+		if(data.nextPno) {
+			$('.next').find('a').attr('href', data.nextPno).text(data.nextTitle);
+			$('.next').show();
+		}
+		if(data.prevPno) {
+			$('.prev').find('a').attr('href', data.prevPno).text(data.prevTitle);
+			$('.prev').show();
+		}
+		
+	});
 }

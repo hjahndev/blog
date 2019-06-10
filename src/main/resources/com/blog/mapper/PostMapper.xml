@@ -3,11 +3,11 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.blog.mapper.PostMapper">
-
+	
   <select id="getList" resultType="com.blog.vo.PostVO">
 	<![CDATA[
-		SELECT /*+INDEX_DESC(blog blog_pno_pk) */
-			   pno, title,  regexp_substr(content,'[^('||chr(13)||chr(10)||')]+',1,1) as content, writer, regDate
+		SELECT /*+INDEX_DESC(tbl_blog blog_pno_pk) */
+			   pno, title, regexp_substr(content,'[^('||chr(13)||chr(10)||')]+',1,1) as content, writer, regDate
 		  FROM tbl_blog 
 		 WHERE 1 = 1
 	]]>
@@ -18,10 +18,10 @@
 		SELECT 
 			   pno, title,  content, writer, blog.regDate, mem.nickname as writerNickname
 		  FROM ( 
-		  		SELECT /*+INDEX_DESC(blog blog_pno_pk) */
+		  		SELECT /*+INDEX_DESC(tbl_blog blog_pno_pk) */
 			           rownum as rn, pno, title,  regexp_substr(content,'[^('||chr(13)||chr(10)||')]+',1,1) as content, 
 			           writer, regDate
-			      FROM tbl_blog blog
+			      FROM tbl_blog
 			     WHERE rownum <= #{page} * #{countPerPage}
 			    ) blog
 	INNER JOIN tbl_member mem
@@ -33,6 +33,27 @@
   <select id="getTotal" resultType="int">
 	SELECT count(*)
 	  FROM tbl_blog
+  </select>
+
+  <select id="getLink" resultType="com.blog.vo.LinkVO">
+	<![CDATA[
+	  SELECT MAX(nextPno) as nextPno, Max(nextTitle) as nextTitle,
+			 MAX(prevPno) as prevPno, Max(prevTitle) as prevTitle
+		FROM (
+			  SELECT rownum as nextRn, pno as nextPno, title as nextTitle
+			  FROM tbl_blog
+			  WHERE pno > #{pno}
+			  AND rownum = 1
+			 ) next
+      FULL OUTER JOIN (
+			  SELECT /*+INDEX_DESC(tbl_blog blog_pno_pk) */
+			          rownum as prevRn, pno as prevPno, title as prevTitle
+			  FROM tbl_blog
+			  WHERE pno < #{pno}
+			  AND rownum = 1
+		     ) prev
+		  ON next.nextPno = prev.prevPno
+	 ]]>
   </select>
 
   <select id="get" resultType="com.blog.vo.PostVO">
