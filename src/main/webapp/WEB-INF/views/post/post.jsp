@@ -67,7 +67,7 @@
 			</div>
 			<div class="row">
 		        <div class="col-6 mb-4">
-	              <div class="card prev">
+	              <div class="card link prev">
 	                <div class="card-body">
 	                  <div class="row">
 	                    <div class="col mr-2">
@@ -82,7 +82,7 @@
 	              </div>
 	            </div>
 	            <div class="col-6 mb-4">
-	              <div class="card next">
+	              <div class="card link next">
 	                <div class="card-body">
 	                  <div class="row">
 	                    <div class="col mr-2">

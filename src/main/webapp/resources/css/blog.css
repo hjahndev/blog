@@ -217,6 +217,6 @@ p {
 .text-xs {
     font-size: .8rem;
 }
-.card {
+.card.link {
 	margin-top: 50px;
 }

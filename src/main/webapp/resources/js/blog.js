@@ -89,7 +89,7 @@ $(document).ready(function(){
 		$("#pageForm").attr('action', '/list').submit();
 	});
 	
-	$('.card').on('click', 'a', function() {
+	$('.card.link').on('click', 'a', function() {
 		event.preventDefault();
 		$("#pageForm").attr('action', '/post/'+$(this).attr('href')).submit();
 	});
