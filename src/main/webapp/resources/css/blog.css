@@ -217,6 +217,31 @@ p {
 .text-xs {
     font-size: .8rem;
 }
-.card.link {
+.card {
 	margin-top: 50px;
+	border-radius: 0;
+}
+@media only screen and (min-width: 768px) {
+  header.masthead .site-heading {
+    padding: 100px 0;
+  }
+}
+.main {
+	font-size: 80%
+}
+.card-body>.post-preview>a>.post-title {
+    margin-top: 0px;
+}    
+.card-body>.post-preview>a>.post-content,
+.card-body span.comment-writer {
+    font-size: 1rem;
+}
+a:hover { 
+	text-decoration: none;
+}
+.site-heading a {
+	color: #fff;
+}    
+header.masthead {
+	background-color: #35939c;
 }

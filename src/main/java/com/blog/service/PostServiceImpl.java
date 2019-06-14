@@ -61,13 +61,24 @@ public class PostServiceImpl implements PostService {
 		return mapper.delete(pno) == 1;
 	}
 
-	@Override
+/*	@Override
 	public int getTotal() {
 		return mapper.getTotal();
+	}*/
+	@Override
+	public int getTotal(PageSettingVO vo) {
+		return mapper.getTotal(vo);
 	}
 
 	@Override
 	public LinkVO getLink(Long pno) {
 		return mapper.getLink(pno);
 	}
+
+	@Override
+	public List<PostVO> getListWithSearch(PageSettingVO vo) {
+		logger.info("getListWithSearch: {}", vo);
+		return mapper.getListWithSearch(vo);
+	}
+
 }

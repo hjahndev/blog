@@ -1,7 +1,10 @@
 $(document).ready(function(){
-	if($('article').length){//post.jsp 일때
+	if($('article').length){//post.jsp
 		showComments();
 		showPrevNext();
+	}
+	if($('.main').length) {//main.jsp
+		showLatestComments();
 	}
 	checkPagenation();
 	
@@ -93,6 +96,12 @@ $(document).ready(function(){
 		event.preventDefault();
 		$("#pageForm").attr('action', '/post/'+$(this).attr('href')).submit();
 	});
+	
+	$('input[name=search]').keydown(function(key) {
+        if (key.keyCode == 13) {//엔터
+        	$('#search').attr('action', '/list').submit();
+        }
+    });
 });
 function checkPagenation() {
 	if($('.active').find('a').attr('href') === '1') {

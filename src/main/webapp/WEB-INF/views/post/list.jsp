@@ -28,6 +28,7 @@
       <form id="pageForm" method="get">
       	<input type="hidden" name="countPerPage" value="5" />
       	<input type="hidden" name="page" value="" />
+      	<input type="hidden" name="search" value="${pagination.setting.search}" />
       </form>
         <!-- Pager -->
         <nav aria-label="...">

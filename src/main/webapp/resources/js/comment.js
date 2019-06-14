@@ -27,18 +27,18 @@ $(document).ready(function(){
 	});
 
 	//댓글 수정, 삭제 버튼 표시
-	$('.container.comment-list').on('mouseenter', '.control-group.comment-list', addCommentButton);
+	$('.commentForm .container.comment-list').on('mouseenter', '.control-group.comment-list', addCommentButton);
 	
-	$('.container.comment-list').on('mouseleave', '.control-group.comment-list', function() {
+	$('.commentForm .container.comment-list').on('mouseleave', '.control-group.comment-list', function() {
 		//댓글 수정, 삭제 버튼 삭제
 		$('.commentButton').remove();
 	});
 	
 	//대댓글 구현시
-	//$('.container.comment-list').on('click', '.commentReply', function() {});
+	//$('.commentForm .container.comment-list').on('click', '.commentReply', function() {});
 
 	//댓글 수정 화면
-	$('.container.comment-list').on('click', '.commentModify', function() {
+	$('.commentForm .container.comment-list').on('click', '.commentModify', function() {
 		let target = $(this).parents('.control-group.comment-list');
 		//회원은 바로 수정 화면 보여주기(앞에서 본인 확인 함)
 		if(user !== '') {
@@ -54,16 +54,16 @@ $(document).ready(function(){
 		});
 	});
 	//댓글 수정 취소
-	$('.container.comment-list').on('click', 'a[name="cancelModifyBtn"]', function() {
+	$('.commentForm .container.comment-list').on('click', 'a[name="cancelModifyBtn"]', function() {
 		$(this).parents('.control-group.comment-list').find('.comment').show();
 		$(this).siblings('textarea').remove();
 		$(this).siblings('a').remove();
 		//'수정 삭제 댓글' 버튼 다시 나오도록
-		$('.container.comment-list').on('mouseenter', '.control-group.comment-list', addCommentButton);
+		$('.commentForm .container.comment-list').on('mouseenter', '.control-group.comment-list', addCommentButton);
 		$(this).remove();
 	});
 	//댓글 수정
-	$('.container.comment-list').on('click', 'a[name="modifyCommentBtn"]', function() {
+	$('.commentForm .container.comment-list').on('click', 'a[name="modifyCommentBtn"]', function() {
 		let commentTextarea = $(this).siblings('textarea');
 		if(!commentTextarea.val()) {
 			event.preventDefault();
@@ -78,11 +78,11 @@ $(document).ready(function(){
 			showComments();
 		});
 		//'수정 삭제 댓글' 버튼 다시 나오도록
-		$('.container.comment-list').on('mouseenter', '.control-group.comment-list', addCommentButton);
+		$('.commentForm .container.comment-list').on('mouseenter', '.control-group.comment-list', addCommentButton);
 	});
 	
 	//댓글 삭제
-	$('.container.comment-list').on('click', '.commentRemove', function() {
+	$('.commentForm .container.comment-list').on('click', '.commentRemove', function() {
 		let target = $(this).parents('.control-group.comment-list');
 		let cno = target.find('input').val();
 		//회원은 바로 삭제 확인 모달 보여주기(앞에서 본인 확인 함)
@@ -106,7 +106,7 @@ $(document).ready(function(){
 		});
 	});
 	
-	$('.container.comment-list').on('keydown keyup', 'textarea', function() {
+	$('.commentForm .container.comment-list').on('keydown keyup', 'textarea', function() {
 		removeInvalidFeedback($(this));
 		$(this).height(1).height($(this).prop('scrollHeight')+12);
 	});
@@ -124,7 +124,7 @@ function showModifyForm(target) {
 	comment.before('<a class="text-info" name="cancelModifyBtn">'+'취소'+'</a>');
 	comment.hide();
 	//수정, 삭제 버튼 안나오게
-	$('.container.comment-list').off('mouseenter');	
+	$('.commentForm .container.comment-list').off('mouseenter');	
 }
 
 function addInvalidFeedback(textarea) {
@@ -232,27 +232,44 @@ function removeComment(cno, callback){
 }
 
 function showComments() {
+	$.getJSON('/comment/' + $('input[name=pno]').val(), function(data) {
+		makeCommentTags(data);
+	}).fail(function(request, status, error) {
+		console.log('code:'+request.status+'\n'+'message:'+request.responseText+'\n'+'error:'+error);
+	});
+}
+
+function showLatestComments() {
+	$.getJSON('/comment/getLatestList?limit=5', function(data) {
+		makeCommentTags(data, true);
+
+	}).fail(function(request, status, error) {
+		console.log('code:'+request.status+'\n'+'message:'+request.responseText+'\n'+'error:'+error);
+	});
+}
+
+function makeCommentTags(data, latestComments) {
 	$('.container.comment-list').empty();
 	var formGroup = $('<div class="form-group"></div>');
-	$.getJSON('/comment/' + $('input[name=pno]').val(), function(data) {
-		$.each(data, function(index, item) {
-			let controlGroup = $('<div class="control-group comment-list"></div>');
-			let row = $('<div class="form-row"></div>');
-			if(item.writerNickname === null) {
-				row.append(formGroup.clone().html('<span class="comment-writer">'+item.writer+'</span>'));
-			} else {
-				row.append(formGroup.clone().html('<span class="comment-writer" data-user="'+item.writer+'">'+item.writerNickname+'</span>'));
-			}
-			row.append(formGroup.clone().html('<span class="comment-date">'+displayTime(item.regDate)+'</span>'));
-			controlGroup.append(row);
-			controlGroup.append(formGroup.clone().html('<div class="comment">'+item.comment.replace('\n', '<br>')
-													  +'</div>'));
-			controlGroup.append('<input class="cno" type="hidden" value='+item.cno+'>');
+	$.each(data, function(index, item) {
+		let controlGroup = $('<div class="control-group comment-list"></div>');
+		let row = $('<div class="form-row"></div>');
+		if(item.writerNickname === null) {
+			row.append(formGroup.clone().html('<span class="comment-writer">'+item.writer+'</span>'));
+		} else {
+			row.append(formGroup.clone().html('<span class="comment-writer" data-user="'+item.writer+'">'+item.writerNickname+'</span>'));
+		}
+		row.append(formGroup.clone().html('<span class="comment-date">'+displayTime(item.regDate)+'</span>'));
+		controlGroup.append(row);
+		controlGroup.append(formGroup.clone().html('<div class="comment">'+item.comment.replace('\n', '<br>')
+												  +'</div>'));
+		controlGroup.append('<input class="cno" type="hidden" value='+item.cno+'>');
+		if(latestComments) {
+			$('.container.comment-list').append(controlGroup.wrap('<a href="/post/'+item.pno+'"></a>').parent());
+		} else {
 			$('.container.comment-list').append(controlGroup);
-		});
-	}).fail(function(xhr, status, er) {
-		
-	});
+		}
+	});	
 }
 
 function displayTime(timeValue) {

@@ -49,4 +49,9 @@ public class CommentServiceImpl implements CommentService {
 		return pwencoder.matches(vo.getPassword(), mapper.checkPassword(vo));
 	}
 
+	@Override
+	public List<CommentVO> getLatestList(int limit) {
+		return mapper.getLatestList(limit);
+	}
+
 }

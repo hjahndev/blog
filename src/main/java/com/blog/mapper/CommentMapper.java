@@ -8,6 +8,8 @@ public interface CommentMapper {
 
 	public List<CommentVO> getList(Long pno);
 
+	public List<CommentVO> getLatestList(int limit);
+
 	public int insert(CommentVO vo);
 
 	public int update(CommentVO vo);

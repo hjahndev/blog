@@ -14,6 +14,8 @@ public interface PostMapper {
 
 	public List<PostVO> getListWithPage(PageSettingVO vo);
 
+	public List<PostVO> getListWithSearch(PageSettingVO vo);
+
 	public PostVO get(Long pno);
 
 	public LinkVO getLink(Long pno);
@@ -24,6 +26,6 @@ public interface PostMapper {
 
 	public int delete(Long pno);
 
-	public int getTotal();
+	public int getTotal(PageSettingVO vo);
 
 }

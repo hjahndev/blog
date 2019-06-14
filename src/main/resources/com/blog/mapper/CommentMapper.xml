@@ -48,4 +48,13 @@
 		  FROM tbl_comment
 		 WHERE cno = #{cno}
 	</select>
+	
+	<select id="getLatestList" resultType="com.blog.vo.CommentVO">
+		<![CDATA[
+			SELECT /*+INDEX_DESC(tbl_comment pk_comment) */
+			       rownum, cno, pno, content as "comment", writer, regDate
+			  FROM tbl_comment
+			 WHERE rownum <= #{limit}
+		 ]]>
+	</select>
 </mapper>  

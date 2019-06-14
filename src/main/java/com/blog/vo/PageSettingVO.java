@@ -5,6 +5,7 @@ public class PageSettingVO {
 	private int countPerPage;
 	public static final int PAGINATION = 10;
 	private int page;
+	private String search;
 	
 	public PageSettingVO() {
 		this(1, 5);
@@ -37,8 +38,16 @@ public class PageSettingVO {
 		}
 	}
 	
+	public String getSearch() {
+		return search;
+	}
+	
+	public void setSearch(String search) {
+		this.search = search;
+	}
+	
 	@Override
 	public String toString() {
-		return "PageSettingVO [countPerPage=" + countPerPage + ", page=" + page + "]";
+		return "PageSettingVO [countPerPage=" + countPerPage + ", page=" + page + ", search=" + search + "]";
 	}
 }

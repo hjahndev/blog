@@ -59,6 +59,7 @@
 				    <form id="pageForm" method="get">
 			      	  <input type="hidden" name="countPerPage" value="${pageSet.countPerPage}" />
 			      	  <input type="hidden" name="page" value="${pageSet.page}" />
+			      	  <input type="hidden" name="search" value="${pageSet.search}" />
 			        </form>
 					<button type="submit" class="btn btn-primary btn-sm" id="previousList">목록
 					</button>

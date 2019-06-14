@@ -54,7 +54,7 @@ public class PostVO {
 	public void setWriterNickname(String writerNickname) {
 		this.writerNickname = writerNickname;
 	}
-	
+
 	@Override
 	public String toString() {
 		return "PostVO [pno=" + pno + ", title=" + title + "]";

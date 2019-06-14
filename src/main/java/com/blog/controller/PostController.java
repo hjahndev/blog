@@ -31,15 +31,16 @@ public class PostController {
 
 	@GetMapping(value = "")
 	public String main(Model model) {
-		model.addAttribute("list", service.getList());
+		model.addAttribute("list", service.getListWithPage(new PageSettingVO(1,1)));
 		return "post/main";
 	}
 
 	@GetMapping("/list")
 	public String list(PageSettingVO vo, Model model) {
 		logger.info("list pagingvo: {}", vo);
-		model.addAttribute("list", service.getListWithPage(vo));
-		model.addAttribute("pagination", new PagingVO(vo, service.getTotal()));
+		//model.addAttribute("list", service.getListWithPage(vo));
+		model.addAttribute("list", service.getListWithSearch(vo));
+		model.addAttribute("pagination", new PagingVO(vo, service.getTotal(vo)));
 		return "post/list";
 	}
 	

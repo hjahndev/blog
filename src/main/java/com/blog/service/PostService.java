@@ -10,11 +10,12 @@ public interface PostService {
 	
 	public List<PostVO> getList();
 	public List<PostVO> getListWithPage(PageSettingVO vo);
+	public List<PostVO> getListWithSearch(PageSettingVO vo);
 	public PostVO get(Long pno);
 	public LinkVO getLink(Long pno);
 	public boolean register(PostVO vo);
 	public boolean modify(PostVO vo);
 	public boolean remove(Long pno);
-	public int getTotal();
+	public int getTotal(PageSettingVO vo);
 	
 }
