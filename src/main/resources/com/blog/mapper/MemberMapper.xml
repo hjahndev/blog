@@ -38,10 +38,18 @@
 		VALUES (#{email}, #{password}, #{nickname})
     </insert>
 	
+	<delete id="cancelMembership">
+		DELETE tbl_member WHERE email = #{email}
+	</delete>
+		
 	<insert id="addAuth">
 		INSERT INTO tbl_member_auth (email, auth)
 		VALUES (#{email}, #{auth})
     </insert>
+	
+	<delete id="deleteAuth">
+		DELETE tbl_member_auth WHERE email = #{email}
+	</delete>
 	
 	<insert id="addToken">
 		INSERT INTO resetpw_token (token, email)

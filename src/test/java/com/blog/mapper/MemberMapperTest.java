@@ -1,10 +1,14 @@
 package com.blog.mapper;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNull;
 
+import org.junit.AfterClass;
 import org.junit.Before;
+import org.junit.FixMethodOrder;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.junit.runners.MethodSorters;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,9 +20,10 @@ import com.blog.vo.AuthVO;
 import com.blog.vo.MemberVO;
 
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration("file:src/main/webapp/WEB-INF/spring/root-context.xml")
+@ContextConfiguration({"file:src/main/webapp/WEB-INF/spring/root-context.xml",
+					   "file:src/main/webapp/WEB-INF/spring/security-context.xml"})
+@FixMethodOrder(MethodSorters.NAME_ASCENDING)
 public class MemberMapperTest {
-	private static final Logger logger = LoggerFactory.getLogger(MemberMapperTest.class);
 	
 	@Autowired
 	private MemberMapper mapper;
@@ -30,25 +35,33 @@ public class MemberMapperTest {
 		vo = new MemberVO();
 		vo.setEmail("test@mail.com");
 		vo.setNickname("test");
-		vo.setPassword("123");
+		vo.setPassword("1234");
 		vo.encodePassword(new BCryptPasswordEncoder());
 		vo.addAuth("ROLE_ADMIN");	
 	}
 	
 	@Test
-	public void testCheckUser() {
-		logger.warn("{}", mapper.checkUser("test@mail.com"));
+	public void test1CheckUser() {
+		assertNull(mapper.checkUser("test@mail.com"));
 	}
 	
 	@Test
-	public void testJoin() {
+	public void test2Join() {
 		assertEquals(1, mapper.join(vo));
 	}
 	
 	@Test
-	public void testAuth() {
+	public void test3Auth() {
 		for (AuthVO auth : vo.getAuthList()) {
 			assertEquals(1, mapper.addAuth(auth));
 		}
+	}
+	
+	@Test
+	public void test4Reset() {
+		for (AuthVO authVO: vo.getAuthList()) {
+			assertEquals(1, mapper.deleteAuth(authVO));
+		}
+		assertEquals(1, mapper.cancelMembership(vo));
 	}
 }

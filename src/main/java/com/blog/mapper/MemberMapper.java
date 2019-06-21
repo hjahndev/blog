@@ -10,7 +10,11 @@ public interface MemberMapper {
 
 	public int join(MemberVO vo);
 
+	public int cancelMembership(MemberVO vo);
+
 	public int addAuth(AuthVO authVO);
+
+	public int deleteAuth(AuthVO authVO);
 
 	public int checkNickname(String nickname);
 

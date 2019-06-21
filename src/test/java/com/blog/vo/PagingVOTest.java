@@ -15,7 +15,6 @@ import com.blog.controller.PostController;
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration("file:src/main/webapp/WEB-INF/spring/root-context.xml")
 public class PagingVOTest {
-	private static final Logger logger = LoggerFactory.getLogger(PagingVOTest.class);
 	private PagingVO vo;
 	
 	@Before

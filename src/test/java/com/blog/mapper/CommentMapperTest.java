@@ -1,28 +1,45 @@
 package com.blog.mapper;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 
 import org.junit.Before;
+import org.junit.FixMethodOrder;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import org.junit.runners.MethodSorters;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
+import com.blog.vo.CommentVO;
+import com.blog.vo.PageSettingVO;
+import com.blog.vo.PostVO;
+
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration({"file:src/main/webapp/WEB-INF/spring/root-context.xml",
-"file:src/main/webapp/WEB-INF/spring/security-context.xml"})
+					   "file:src/main/webapp/WEB-INF/spring/security-context.xml"})
+@FixMethodOrder(MethodSorters.NAME_ASCENDING)
 public class CommentMapperTest {
-	private static final Logger logger = LoggerFactory.getLogger(CommentMapperTest.class);
-	
 	@Autowired
 	private CommentMapper mapper;
-
+	@Autowired
+	private PostMapper postMapper;
+	
+	long pno;
+	@Before
+	public void setup() {
+		PostVO post = new PostVO();
+		post.setTitle("Mapper 입력 테스트");
+		post.setContent("Mapper 입력 테스트");
+		post.setWriter("test@mail.com");
+		postMapper.insert(post);
+		pno = postMapper.getListWithSearch(new PageSettingVO()).get(0).getPno();
+	}
+	
 	@Test
 	public void testCountComments() {
-		assertEquals(4, mapper.countComments(142L));
+		assertEquals(0, mapper.countComments(pno));
+		postMapper.delete(pno);
 	}
 
 }

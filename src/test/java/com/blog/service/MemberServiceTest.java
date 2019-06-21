@@ -35,21 +35,20 @@ public class MemberServiceTest {
 	@Before
 	public void setup() {
 		vo = new MemberVO();
-		vo.setEmail("test2@mail.com");
-		vo.setNickname("test2");
+		vo.setEmail("test@mail.com");
+		vo.setNickname("test");
 		vo.setPassword("123");
 		vo.addAuth("ROLE_ADMIN");
 	}
 	
 	@Test
 	public void testExist() {
-		logger.info("{}", service);
 		assertNotNull(service);
 	}
 	
 	@Test
 	public void testJoin() {
-		logger.info("testJoin: {}", service.join(vo));
+		assertEquals(true, service.join(vo));
 	}
 	
 	@Test

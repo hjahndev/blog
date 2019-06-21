@@ -1,5 +1,6 @@
 package com.blog.persistence;
 
+import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.fail;
 
 import java.sql.Connection;
@@ -15,9 +16,9 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration("file:src/main/webapp/WEB-INF/spring/root-context.xml")
+@ContextConfiguration({"file:src/main/webapp/WEB-INF/spring/root-context.xml",
+"file:src/main/webapp/WEB-INF/spring/security-context.xml"})
 public class DataSourceTests {
-	private static final Logger logger = LoggerFactory.getLogger(DataSourceTests.class);
 	@Autowired
 	private DataSource dataSource;
 	
@@ -25,7 +26,7 @@ public class DataSourceTests {
 	public void testConnection() {
 		
 		try (Connection con = dataSource.getConnection()) {
-			logger.info("{}", con);
+			assertNotNull(con);
 		} catch (Exception e) {
 			fail(e.getMessage());
 		}
