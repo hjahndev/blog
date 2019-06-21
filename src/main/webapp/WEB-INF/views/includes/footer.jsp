@@ -22,7 +22,7 @@
               </a>
             </li>
           </ul>
-          <p class="copyright text-muted">Copyright &copy; hjahn.dev All rights reserved.</p>
+          <p class="copyright text-muted">Copyright &copy; 2019. hjahn.dev All rights reserved.</p>
         </div>
       </div>
     </div>

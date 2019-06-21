@@ -245,3 +245,6 @@ a:hover {
 header.masthead {
 	background-color: #35939c;
 }
+header.masthead .site-heading {
+    padding: 120px 0 80px;
+}
