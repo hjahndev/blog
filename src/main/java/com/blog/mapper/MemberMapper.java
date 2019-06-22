@@ -14,7 +14,7 @@ public interface MemberMapper {
 
 	public int addAuth(AuthVO authVO);
 
-	public int deleteAuth(AuthVO authVO);
+	public int deleteAuth(MemberVO vo);
 
 	public int checkNickname(String nickname);
 

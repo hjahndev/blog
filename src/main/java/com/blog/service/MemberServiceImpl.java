@@ -96,4 +96,11 @@ public class MemberServiceImpl implements MemberService {
 		return mapper.resetPassword(vo) == 1;
 	}
 
+	@Transactional
+	@Override
+	public boolean cancelMembership(MemberVO vo) {
+		mapper.deleteAuth(vo);
+		return mapper.cancelMembership(vo) == 1;
+	}
+
 }

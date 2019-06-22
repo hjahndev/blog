@@ -13,6 +13,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
+import com.blog.vo.AuthVO;
 import com.blog.vo.MemberVO;
 
 @RunWith(SpringJUnit4ClassRunner.class)
@@ -48,6 +49,7 @@ public class MemberServiceTest {
 	
 	@Test
 	public void testJoin() {
+		service.cancelMembership(vo);
 		assertEquals(true, service.join(vo));
 	}
 	

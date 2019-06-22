@@ -16,4 +16,6 @@ public interface MemberService {
 	public boolean checkToken(TokenVO vo);
 
 	public boolean resetPassword(MemberVO vo, TokenVO token);
+
+	public boolean cancelMembership(MemberVO vo);
 }

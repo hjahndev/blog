@@ -48,6 +48,7 @@ public class PostServiceTest {
 	@Test
 	public void test2Register() {
 		logger.info("result: {}", service.register(post));
+		postList = service.getList();
 		assertEquals(post, service.get(postList.get(0).getPno()));
 	}
 	

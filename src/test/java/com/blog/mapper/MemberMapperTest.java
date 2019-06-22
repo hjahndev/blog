@@ -42,6 +42,8 @@ public class MemberMapperTest {
 	
 	@Test
 	public void test1CheckUser() {
+		mapper.deleteAuth(vo);
+		mapper.cancelMembership(vo);
 		assertNull(mapper.checkUser("test@mail.com"));
 	}
 	
@@ -55,13 +57,5 @@ public class MemberMapperTest {
 		for (AuthVO auth : vo.getAuthList()) {
 			assertEquals(1, mapper.addAuth(auth));
 		}
-	}
-	
-	@Test
-	public void test4Reset() {
-		for (AuthVO authVO: vo.getAuthList()) {
-			assertEquals(1, mapper.deleteAuth(authVO));
-		}
-		assertEquals(1, mapper.cancelMembership(vo));
 	}
 }
