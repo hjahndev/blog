@@ -76,6 +76,8 @@ public class PostMapperTest {
 	@Test
 	public void test5Delete() {
 		assertEquals(1, mapper.delete(postList.get(0).getPno()));
+		assertEquals(1, mapper.delete(postList.get(1).getPno()));
+		assertEquals(1, mapper.delete(postList.get(2).getPno()));
 	}
 
 }
