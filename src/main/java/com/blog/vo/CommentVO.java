@@ -68,6 +68,6 @@ public class CommentVO {
 	
 	@Override
 	public String toString() {
-		return "CommentVO [cno=" + cno + ", pno=" + pno + ", password=" + password + ", comment=" + comment + ", writer=" + writer + "]";
+		return "CommentVO [cno=" + cno + ", pno=" + pno + ", comment=" + comment + ", writer=" + writer + "]";
 	}
 }

@@ -49,7 +49,8 @@ $(document).ready(function(){
 		let cno = target.find('input').val();
 		$('#checkPasswordModal').modal('show');
 		$('#checkPasswordModal').find('input[name=cno]').attr('value', cno);
-		$('#checkPasswordBtn').on('click', function() { 
+		//jQuery 이벤트 중복 에러 막기 위해 off() 추가
+		$('#checkPasswordBtn').off('click').on('click', function() { 
 			checkCommentPassword(showModifyForm, target)
 		});
 	});
@@ -93,7 +94,8 @@ $(document).ready(function(){
 		//비회원은 비번 맞을때 삭제 확인 모달 보여주기
 		$('#checkPasswordModal').modal('show');
 		$('#checkPasswordModal').find('input[name=cno]').attr('value', cno);
-		$('#checkPasswordBtn').on('click', function() { 
+		//jQuery 이벤트 중복 에러 막기 위해 off() 추가
+		$('#checkPasswordBtn').off('click').on('click', function() { 
 			checkCommentPassword(showRemoveModal,cno);
 		});
 	});
@@ -109,6 +111,9 @@ $(document).ready(function(){
 	$('.commentForm .container.comment-list').on('keydown keyup', 'textarea', function() {
 		removeInvalidFeedback($(this));
 		$(this).height(1).height($(this).prop('scrollHeight')+12);
+	});
+	$('#checkPasswordModal').find('button:contains("취소")').on('click', function() {
+		$('#checkPasswordModal').find('form')[0].reset();
 	});
 });
 
