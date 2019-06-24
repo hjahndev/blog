@@ -18,7 +18,7 @@
             </div>
           </a>
             <p class="post-meta">Posted by
-              <a href="#"><c:out value="${post.writerNickname}" /></a>
+              <c:out value="${post.writerNickname}" />
               on <fmt:formatDate pattern="yyyy-MM-dd"
               value="${post.regdate}"/></p>
         </div>

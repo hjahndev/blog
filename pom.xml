@@ -32,6 +32,7 @@
 			<version>${org.springframework-version}</version>
 			<scope>test</scope>
 		</dependency>
+		<!-- db -->
 		<dependency>
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-jdbc</artifactId>

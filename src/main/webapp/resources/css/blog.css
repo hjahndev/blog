@@ -236,8 +236,11 @@ p {
 .card-body span.comment-writer {
     font-size: 1rem;
 }
-a:hover { 
+a:hover, a:link { 
 	text-decoration: none;
+}
+p.about a {
+	color: #0085a1;
 }
 .site-heading a {
 	color: #fff;
@@ -247,4 +250,11 @@ header.masthead {
 }
 header.masthead .site-heading {
     padding: 120px 0 80px;
+}
+div#post p, p.about{
+	line-height: 1.7rem;
+}
+div.introduce p {
+	margin: 15px 0;
+	line-height: 1.9rem;
 }
