@@ -251,10 +251,10 @@ header.masthead {
 header.masthead .site-heading {
     padding: 120px 0 80px;
 }
-div#post p, p.about{
-	line-height: 1.7rem;
-}
-div.introduce p {
-	margin: 15px 0;
+p {
+	margin: 0;
 	line-height: 1.9rem;
+}
+#post {
+	padding: 2rem 0.5rem;
 }
