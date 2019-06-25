@@ -2,6 +2,7 @@ $(document).ready(function(){
 	if($('article').length){//post.jsp
 		showComments();
 		showPrevNext();
+		showPost();
 	}
 	if($('.main').length) {//main.jsp
 		showLatestComments();
@@ -130,7 +131,6 @@ function countTextRows(postText){
 
 function showPrevNext() {
 	$.getJSON('/getLink/' + $('#pno').val(), function(data) {
-		console.log(data);
 		$('.next').hide();
 		$('.prev').hide();
 		if(data.nextPno) {
@@ -143,4 +143,16 @@ function showPrevNext() {
 		}
 		
 	});
+}
+
+function showPost() {
+	let content = $('#post').text().trim().split('\n');
+	content = content.map(function(data, index) {
+		if(data === '') {
+			return '<br/>';
+		} else {
+			return '<p>'+data+'</p>';
+		}
+	}).join('');
+	$('#post').html($(content));
 }

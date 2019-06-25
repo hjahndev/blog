@@ -27,8 +27,9 @@
 			<div class="row">
 				<div class="col-lg-8 col-12 mx-auto">
 				  <div id="post" class="form-group floating-label-form-group controls">
-				  	<p><c:out escapeXml="false" 
-				  	value="${fn:replace(post.content, newLineChar, '</p><p>')}" /></p>
+				  	<%-- <p><c:out escapeXml="false" 
+				  	value="${fn:replace(post.content, newLineChar, '</p><p>')}" /></p> --%>
+				  	<c:out value="${post.content}" />
 				  </div>	
 				</div>
 			</div>
