@@ -62,7 +62,7 @@ public class PostController {
 		logger.info("modify: {}", vo);
 		if(service.modify(vo)) {
 			rttr.addFlashAttribute("result", "success");
-			rttr.addFlashAttribute("pno", vo.getPno());
+			rttr.addFlashAttribute("post", vo);
 			rttr.addFlashAttribute("pageSet", pageSet);
 		}
 		return "redirect:/post/"+vo.getPno();
@@ -88,12 +88,12 @@ public class PostController {
 		return "redirect:/list";
 	}
 	
-	@PreAuthorize("hasRole('ROLE_ADMIN')")
+	@PreAuthorize("hasRole('ROLE_ADMIN') and principal.username == #vo.writer")
 	@GetMapping({"/modify"})
-	public String updateForm(@RequestParam("pno") Long pno, int rows, 
+	public String updateForm(PostVO vo, int rows, 
 							PageSettingVO pageSet, Model model) {
 		logger.info("/updateForm");
-		model.addAttribute("post", service.get(pno));
+		model.addAttribute("post", service.get(vo.getPno()));
 		model.addAttribute("rows", rows);
 		model.addAttribute("pageSet", pageSet);
 		return "post/modify";
