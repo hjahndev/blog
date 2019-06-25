@@ -57,7 +57,6 @@
 				  <div class="form-group col-4 text-right">
 				    <form id="pageForm">
 					  <input id="pno" name="pno" type="hidden" value="${post.pno}">
-					  <input name="writer" type="hidden" value="${post.writer}">
 			      	  <input type="hidden" name="countPerPage" value="${pageSet.countPerPage}" />
 			      	  <input type="hidden" name="page" value="${pageSet.page}" />
 			      	  <input type="hidden" name="search" value="${pageSet.search}" />

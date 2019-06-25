@@ -32,7 +32,9 @@ $(document).ready(function(){
 	$('#updateFormBtn').on('click', function(){
 		let rows = countTextRows($('#post').text());
 		let rowsInput = '<input type="hidden" name="rows" value="'+rows+'" />';
-		$('#pageForm').append(rowsInput).attr('method', 'get').attr('action','/modify').submit();
+		let writer = $('input[name=writer]').data('user');
+		let writerInput = '<input type="hidden" name="writer" value="'+writer+'" />';
+		$('#pageForm').append(rowsInput).append(writerInput).attr('method', 'get').attr('action','/modify').submit();
 	});
 	
 	$('#modifyBtn').on('click', function(){
