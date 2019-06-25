@@ -8,7 +8,7 @@
   <!-- Error Text -->
   <div class="text-center">
     <div class="error mx-auto"><c:out value="${code}"/></div>
-    <p class="lead text-gray-800 mb-5"><c:out value="${msg}"/></p>
+    <p class="lead text-gray-800 mb-3"><c:out value="${msg}"/></p>
     <p class="text-gray-800 mb-0"><c:out value="${explain}"/></p>
   </div>
 

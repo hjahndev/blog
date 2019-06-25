@@ -113,8 +113,10 @@ public class MemberController {
 	@RequestMapping(value = "/accessError", method = {RequestMethod.GET, RequestMethod.POST})
 	public String accessDenied(Authentication auth, Model model) {
 		logger.info("access Denied : {}", auth);
+		model.addAttribute("code", "접근 불가능");
 		model.addAttribute("msg", "접근 불가능한 페이지입니다.");
-		return "/error/accessError";
+		model.addAttribute("explain", "요청하신 페이지를 실행할 권한이 없습니다.");
+		return "/error/error";
 	}
 	
 }
