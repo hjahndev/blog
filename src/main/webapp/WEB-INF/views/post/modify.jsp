@@ -21,6 +21,9 @@
           <input name="pno" type="hidden" value="${post.pno}">
           <input name="writer" type="hidden" value="${post.writer}">
           <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
+      	  <input type="hidden" name="countPerPage" value="${pageSet.countPerPage}" />
+      	  <input type="hidden" name="page" value="${pageSet.page}" />
+      	  <input type="hidden" name="search" value="${pageSet.search}" />          
           <div class="control-group">
            	<input type="text" class="form-control" name="title"
            	value='<c:out value="${post.title}"/>' required>

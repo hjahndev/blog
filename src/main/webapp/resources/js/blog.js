@@ -31,7 +31,8 @@ $(document).ready(function(){
 	
 	$('#updateFormBtn').on('click', function(){
 		let rows = countTextRows($('#post').text());
-		location.replace('/modify?pno=' + $('#pno').val() + '&rows=' + rows);
+		let rowsInput = '<input type="hidden" name="rows" value="'+rows+'" />';
+		$('#pageForm').append(rowsInput).attr('method', 'get').attr('action','/modify').submit();
 	});
 	
 	$('#modifyBtn').on('click', function(){
@@ -55,7 +56,7 @@ $(document).ready(function(){
 	});
 	
 	$('#cancelBtn').on('click', function(){
-		location.replace('/post?pno='+$('input[name=pno]').val());
+		$('#modifyForm').attr('method', 'get').attr('action','/post/').submit();
 	});
 	
 	$('textarea').on('keyup input change paste propertychange', function() {

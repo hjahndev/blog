@@ -41,7 +41,6 @@
 	<div class="row">
 		<div class="col-lg-8 col-12 mx-auto">
 			<div class=" text-center">
-			    <input id="pno" name="pno" type="hidden" value="${post.pno}">
 			    <div class="row">
 	  	    	  <div class="form-group col-4"></div>
 	  	    	  <div class="form-group col-4 text-center">
@@ -56,7 +55,8 @@
 					  </sec:authorize>	  
 					  </div>
 				  <div class="form-group col-4 text-right">
-				    <form id="pageForm" method="get">
+				    <form id="pageForm">
+					  <input id="pno" name="pno" type="hidden" value="${post.pno}">
 			      	  <input type="hidden" name="countPerPage" value="${pageSet.countPerPage}" />
 			      	  <input type="hidden" name="page" value="${pageSet.page}" />
 			      	  <input type="hidden" name="search" value="${pageSet.search}" />
