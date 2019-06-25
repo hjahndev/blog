@@ -58,7 +58,7 @@ $(document).ready(function(){
 	});
 	
 	$('#cancelBtn').on('click', function(){
-		$('#modifyForm').attr('method', 'get').attr('action','/post/').submit();
+		$('#modifyForm').attr('method', 'get').attr('action','/post/'+$('input[name=pno]').val()).submit();
 	});
 	
 	$('textarea').on('keyup input change paste propertychange', function() {
