@@ -185,7 +185,7 @@ function checkCommentPassword(callback, callbackParam){
 	$('#checkPasswordModal').modal('hide');
 	$('#checkPasswordModal').find('form')[0].reset();
 }
-function addComment(comment, callback, error){
+function addComment(comment, callback){
 	$.ajax({
 		type : 'POST',
 		url : '/comment/new',
@@ -196,10 +196,8 @@ function addComment(comment, callback, error){
 				callback(result);
 			}
 		},
-		error : function(xhr, status, er) {
-			if (error) {
-				error(er);
-			}
+		error : function(request, status, error) {
+			location.href = '/error/'+request.status;
 		}
 	})
 }
@@ -216,7 +214,7 @@ function modifyComment(comment, callback){
 			}
 		},
 		error : function(request, status, error) {
-			 console.log('code:'+request.status+'\n'+'message:'+request.responseText+'\n'+'error:'+error);
+			 location.href = '/error/'+request.status;
 		}
 	})
 }
@@ -231,7 +229,7 @@ function removeComment(cno, callback){
 			}
 		},
 		error : function(request, status, error) {
-			 console.log('code:'+request.status+'\n'+'message:'+request.responseText+'\n'+'error:'+error);
+			 location.href = '/error/'+request.status;
 		}
 	})
 }
@@ -240,7 +238,7 @@ function showComments() {
 	$.getJSON('/comment/' + $('input[name=pno]').val(), function(data) {
 		makeCommentTags(data);
 	}).fail(function(request, status, error) {
-		console.log('code:'+request.status+'\n'+'message:'+request.responseText+'\n'+'error:'+error);
+		location.href = '/error/'+request.status;
 	});
 }
 
@@ -249,7 +247,8 @@ function showLatestComments() {
 		makeCommentTags(data, true);
 
 	}).fail(function(request, status, error) {
-		console.log('code:'+request.status+'\n'+'message:'+request.responseText+'\n'+'error:'+error);
+		//console.log('code:'+request.status+'\n'+'message:'+request.responseText+'\n'+'error:'+error);
+		location.href = '/error/'+request.status;
 	});
 }
 

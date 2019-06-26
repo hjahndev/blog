@@ -91,7 +91,7 @@ function logout(){
 			location.replace('/member/login');
 		},
 		error : function(request, status, error) {
-			console.log('code:'+request.status+'\n'+'message:'+request.responseText+'\n'+'error:'+error);
+			location.href = '/error/'+request.status;
 		}
 	})
 }
@@ -122,7 +122,7 @@ function checkNickname() {
 			}
 		},
 		error : function(request, status, error) {
-			console.log('code:'+request.status+'\n'+'message:'+request.responseText+'\n'+'error:'+error);
+			location.href = '/error/'+request.status;
 		}
 	})
 }
@@ -140,7 +140,7 @@ function checkEmail() {
 			}
 		},
 		error : function(request, status, error) {
-			console.log('code:'+request.status+'\n'+'message:'+request.responseText+'\n'+'error:'+error);
+			location.href = '/error/'+request.status;
 		}
 	})
 }
@@ -175,7 +175,6 @@ function forgotPassword() {
 		},
 		error : function(request, status, error) {
 			location.href = '/error/'+request.status;
-			console.log('code:'+request.status+'\n'+'message:'+request.responseText+'\n'+'error:'+error);
 		}
 	})
 }
