@@ -82,7 +82,7 @@ public class PostControllerTest {
 				.param("content", "Controller 수정 테스트")
 				.param("writer", "test@mail.com"))
 				.andExpect(status().isFound())
-				.andExpect(view().name("redirect:/list"));
+				.andExpect(view().name("redirect:/post/"+pno));
 	}
 	
 	@Test
