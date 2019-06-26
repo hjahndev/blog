@@ -86,7 +86,7 @@ public class MemberController {
 			logger.info("등록되지 않은 이메일");
 			return "등록되지 않은 이메일입니다.";
 		}	
-		if(service.forgotPassword(email)) {
+		if(service.sendPasswordResetPage(email)) {
 			return "메일을 발송했습니다.";
 		}
 		return "메일을 발송할 수 없습니다.";

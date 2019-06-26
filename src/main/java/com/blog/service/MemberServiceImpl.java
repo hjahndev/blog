@@ -1,18 +1,15 @@
 package com.blog.service;
 
-import javax.mail.internet.MimeMessage;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.javamail.JavaMailSender;
-import org.springframework.mail.javamail.MimeMessageHelper;
-import org.springframework.mail.javamail.MimeMessagePreparator;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.blog.mapper.MemberMapper;
+import com.blog.util.Mail;
 import com.blog.vo.AuthVO;
 import com.blog.vo.MemberVO;
 import com.blog.vo.TokenVO;
@@ -45,29 +42,12 @@ public class MemberServiceImpl implements MemberService {
 	}
 
 	@Override
-	public boolean forgotPassword(String email) {
+	public boolean sendPasswordResetPage(String email) {
 		logger.info("비밀번호 찾기: {}", email);
 		TokenVO vo = new TokenVO(email);
 		int result = mapper.addToken(vo);
-
-		final MimeMessagePreparator preparator = new MimeMessagePreparator() { 
-			@Override 
-			public void prepare(MimeMessage mimeMessage) throws Exception { 
-				final MimeMessageHelper helper = new MimeMessageHelper(mimeMessage, true, "UTF-8"); 
-				helper.setFrom("hjahn.dev@gmail.com"); 
-				helper.setTo(email); 
-				helper.setSubject("[blog] 비밀번호 재설정 메일입니다."); 
-				helper.setText(new StringBuffer().append("<p>아래 링크를 눌러 비밀번호를 재설정하세요.</p>")
-								.append("<a href='http://localhost:8080/member/resetPassword?email=")
-								.append(email)
-								.append("&token=")
-								.append(vo.getToken())
-								.append("'>비밀번호 재설정</a>")
-								.toString(), true); 
-			} 
-		}; 
-		mailSender.send(preparator); 
-
+		Mail mail = new Mail(mailSender);
+		mail.sendPasswordResetPage(vo);
 		return result == 1;
 	}
 

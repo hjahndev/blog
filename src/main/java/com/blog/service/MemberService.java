@@ -7,7 +7,7 @@ public interface MemberService {
 
 	public boolean join(MemberVO vo);
 
-	public boolean forgotPassword(String email);
+	public boolean sendPasswordResetPage(String email);
 
 	public boolean checkNickname(String nickname);
 

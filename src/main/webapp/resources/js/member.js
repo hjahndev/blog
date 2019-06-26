@@ -174,6 +174,7 @@ function forgotPassword() {
 			alert(result);
 		},
 		error : function(request, status, error) {
+			location.href = '/error/'+request.status;
 			console.log('code:'+request.status+'\n'+'message:'+request.responseText+'\n'+'error:'+error);
 		}
 	})
