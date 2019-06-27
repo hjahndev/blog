@@ -239,7 +239,7 @@ p {
 a:hover, a:link { 
 	text-decoration: none;
 }
-p.about a {
+p.about a, article a {
 	color: #0085a1;
 }
 .site-heading a {

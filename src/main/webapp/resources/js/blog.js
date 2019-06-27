@@ -59,7 +59,16 @@ $(document).ready(function(){
 	});
 	
 	$('#cancelBtn').on('click', function(){
-		$('#modifyForm').attr('method', 'get').attr('action','/post/'+$('input[name=pno]').val()).submit();
+		let form = $('#modifyForm');
+		let pno = $('input[name=pno]').val();
+		let countPerPage = $('input[name=countPerPage]').clone();
+		let page = $('input[name=page]').clone();
+		let search = $('input[name=search]').clone();
+		form.empty();
+		form.append(countPerPage);
+		form.append(page);
+		form.append(search);
+		form.attr('method', 'get').attr('action','/post/'+pno).submit();
 	});
 	
 	$('textarea').on('keyup input change paste propertychange', function() {
