@@ -154,8 +154,8 @@ function showPrevNext() {
 	});
 }
 
-function showPost() {
-	let content = $('#post').text().trim().split('\n');
+function addLineBreak(data) {
+	let content = data.trim().split('\n');
 	content = content.map(function(data, index) {
 		if(data === '') {
 			return '<br/>';
@@ -163,5 +163,8 @@ function showPost() {
 			return '<p>'+data+'</p>';
 		}
 	}).join('');
-	$('#post').html($(content));
+	return content;
+}
+function showPost() {
+	$('#post').html(addLineBreak($('#post').text()));
 }

@@ -80,6 +80,7 @@ span.comment-writer {
 }
 .container.comment-list {
 	padding-left: 0;
+	padding-right: 0;
 }
 .commentButton span {
 	font-size: .8rem;

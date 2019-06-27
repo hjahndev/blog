@@ -21,6 +21,7 @@ $(document).ready(function(){
 		}
 		addComment(comment, function() {
 			$('#commentForm')[0].reset();
+			$('textarea').css('height', 'auto');
 			showComments();
 			form.classList.remove('was-validated');
 		});
@@ -265,8 +266,7 @@ function makeCommentTags(data, latestComments) {
 		}
 		row.append(formGroup.clone().html('<span class="comment-date">'+displayTime(item.regDate)+'</span>'));
 		controlGroup.append(row);
-		controlGroup.append(formGroup.clone().html('<div class="comment">'+item.comment.replace('\n', '<br>')
-												  +'</div>'));
+		controlGroup.append(formGroup.clone().html('<div class="comment">'+addLineBreak(item.comment)+'</div>'));
 		controlGroup.append('<input class="cno" type="hidden" value='+item.cno+'>');
 		if(latestComments) {
 			$('.container.comment-list').append(controlGroup.wrap('<a href="/post/'+item.pno+'"></a>').parent());

@@ -109,7 +109,7 @@
  			<div class="control-group">
 				<form id="commentForm" novalidate>
 					<div class="form-group">
-						<textarea class="form-control" placeholder="댓글" name="comment"	maxlength="1000"
+						<textarea class="form-control" placeholder="댓글" name="comment"	maxlength="710"
 						 required></textarea>
 						<div class="invalid-feedback">
 						  댓글 내용을 입력해 주세요. 
