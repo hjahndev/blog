@@ -17,6 +17,11 @@ $(document).ready(function(){
 		$("#pageForm").submit();
 	});
 	
+	$('.read-main').on('click', function(e){
+		e.preventDefault();
+		$("#pageForm").attr('action', '/post/'+$(this).attr('href')).submit();
+	});
+	
 	$('#removeBtn').on('click', function(){
 		$('#removeModal').modal('show');
 		$('#removeModal').find('input[name=pno]').attr('value', $('#pno').val());

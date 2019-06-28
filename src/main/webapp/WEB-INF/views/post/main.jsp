@@ -33,7 +33,7 @@
 		  <div class="card-body">
 	        <c:forEach items="${list}" var="post">
 	          <div class="post-preview">
-	            <a class="read" href='<c:out value="${post.pno}"/>'>
+	            <a class="read-main" href='<c:out value="${post.pno}"/>'>
 	              <div class="post-title">
 	                <c:out value="${post.title}" />
 	              </div>
@@ -41,6 +41,11 @@
 	                <c:out value="${post.content}" />
 	              </div>
 	            </a>
+	            <form id="pageForm">
+				  <input id="pno" name="pno" type="hidden" value="">
+			      <input type="hidden" name="countPerPage" value="5" />
+			      <input type="hidden" name="page" value="1" />
+			    </form>
 	          </div>
 	        <hr>
 	        </c:forEach>
