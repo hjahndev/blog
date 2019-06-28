@@ -88,7 +88,7 @@ function logout(){
 		type : 'POST',
 		url : '/member/logout',
 		success: function(result, status, xhr) {
-			location.replace('/member/login');
+			location.href = result;
 		},
 		error : function(request, status, error) {
 			location.href = '/error/'+request.status;
