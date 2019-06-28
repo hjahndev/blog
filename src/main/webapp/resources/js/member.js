@@ -84,16 +84,11 @@ $(document).ready(function(){
   	
 });
 function logout(){
-	$.ajax({
-		type : 'POST',
-		url : '/member/logout',
-		success: function(result, status, xhr) {
-			location.href = result;
-		},
-		error : function(request, status, error) {
-			location.href = '/error/'+request.status;
-		}
-	})
+	let token = $("meta[name='_csrf']").attr("content");
+	let form = $('<form method="post" action="/member/logout"></form>');
+	form.append('<input type="hidden" name="_csrf" value="'+token+'" />');
+	$(document.body).append(form);
+	form.submit();
 }
 function isInvalidForm(form) {
 	if(!form.checkValidity()) {

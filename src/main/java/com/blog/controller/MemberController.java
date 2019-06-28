@@ -31,13 +31,6 @@ public class MemberController {
 		logger.info("로그인 화면");
 	}
 	
-	@ResponseBody
-	@RequestMapping(value = "/logoutSuccess", method = {RequestMethod.GET, RequestMethod.POST})
-	public String logoutSuccess() {
-		logger.info("로그아웃");
-		return "/member/login";
-	}
-
 	@GetMapping(value = "/join")
 	public void joinForm() {
 		logger.info("회원가입 화면");

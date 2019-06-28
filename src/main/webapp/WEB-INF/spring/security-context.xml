@@ -22,8 +22,7 @@ xsi:schemaLocation="http://www.springframework.org/schema/security
 		login-page="/member/login"
 		username-parameter="email"
 		authentication-failure-handler-ref="customAuthenticationFailureHandler"/>
-		<security:logout logout-url="/member/logout" logout-success-url="/member/logoutSuccess"
-		invalidate-session="true" delete-cookies="remember-me,JSESSION_ID"/>
+		<security:logout logout-url="/member/logout" invalidate-session="true" delete-cookies="remember-me,JSESSION_ID"/>
 		<security:remember-me data-source-ref="dataSource" token-validity-seconds="604800" />
 	</security:http>
 
