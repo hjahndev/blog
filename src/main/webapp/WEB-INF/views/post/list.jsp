@@ -14,7 +14,7 @@
               <c:out value="${post.title}" />
             </div>
             <div class="post-content">
-              <c:out value="${post.content}" />
+              <c:out value="${post.content.replaceAll('\\\<.*?\\\>','')}"/>
             </div>
           </a>
             <p class="post-meta">Posted by
