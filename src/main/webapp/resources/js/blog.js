@@ -145,8 +145,6 @@ function countTextRows(postText){
 
 function showPrevNext() {
 	$.getJSON('/getLink/' + $('#pno').val(), function(data) {
-		$('.next').hide();
-		$('.prev').hide();
 		if(data.nextPno) {
 			$('.next').find('a').attr('href', data.nextPno).text(data.nextTitle);
 			$('.next').show();

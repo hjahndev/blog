@@ -259,3 +259,6 @@ p {
 #post {
 	padding: 2rem 0.5rem;
 }
+.next, .prev {
+	display: none;
+}
